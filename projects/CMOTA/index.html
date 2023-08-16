@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Context-Aware Planning and Environment-Aware Memory for Instruction Following Embodied Agents</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://bhkim94.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://bhkim94.github.io/projects/MOCA">
+            MOCA
+          </a>
+          <a class="navbar-item" href="https://bhkim94.github.io/projects/ABP">
+            ABP
+          </a>
+          <a class="navbar-item" href="https://bhkim94.github.io/projects/MCR-Agent">
+            MCR-Agent
+          </a>
+          <a class="navbar-item" href="https://bhkim94.github.io/projects/CPEM">
+            CPEM
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered is-full-width">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size:41px">
+            Context-Aware Planning and Environment-Aware Memory for Instruction Following Embodied Agents
+          </h1>
+          <h1 class="title is-4 publication-title">
+            ICCV 2023
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://bhkim94.github.io">Byeonghwi Kim</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Jinyeon Kim</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://uyeongkim.github.io">Yuyeong Kim</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="">Cheolhong Min</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://ppolon.github.io">Jonghyun Choi</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Yonsei University,</span>
+            <span class="author-block"><sup>2</sup>Gwangju Institute of Science and Technology</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Coming Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2308.07241"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link.
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>-->
+              <!-- Code Link.
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>-->
+              <!-- Dataset Link.
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+              </span>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="title is-4 is-centered has-text-centered">🏆 Challenge Winners 🏆</h2>
+      <h2 class="title is-5 is-centered has-text-centered"> <a href="https://askforalfred.com/EAI23/">1st Generalist Language Grounding Agents Challenge (CVPRW'23)</a> </h2>
+      <br>
+      <img src='static/figures/teaser.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:65%">
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Context-aware Planning and Environment-aware Memory (CPEM)</span>
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Accomplishing household tasks such as ‘bringing a cup
+              of water’ requires planning step-by-step actions by maintaining knowledge about the spatial arrangement of objects
+              and the consequences of previous actions. Perception models of the current embodied AI agents, however, often make
+              mistakes due to a lack of such knowledge but rely on imperfect learning of imitating agents or an algorithmic planner
+              without knowledge about the changed environment by the
+              previous actions. To address the issue, we propose CPEM
+              (Context-aware Planner and Environment-aware Memory)
+              to incorporate the contextual information of previous
+              actions for planning and maintaining spatial arrangement
+              of objects with their states (e.g., if an object has been
+              moved or not) in an environment to the perception model
+              for improving both visual navigation and object interaction. We observe that CPEM achieves state-of-the-art task
+              success performance in various metrics using a challenging
+              interactive instruction following benchmark both in seen
+              and unseen environments by large margins (up to +10.70%
+              in unseen env.). CPEM with the templated actions, named
+ECLAIR, also won the generalist language grounding
+agents challenge at Embodied AI Workshop in CVPR’23.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video.
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>-->
+      <!--/ Paper video. -->
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3">Context-aware Planning and Environment-aware Memory</h2>
+    <!--
+    <div class="columns is-centered">
+      <div class="column is-two-quarters">
+        <div class="content has-text-justified">
+          <p>
+            dd
+          </p>
+        </div>
+      </div>
+      <div class="column is-two-quarter">
+        <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+      </div>
+    </div>
+    -->
+    <div class="content has-text-justified">
+      <p>
+        Perception models of the current embodied AI agents, however, often make mistakes due to a lack of such knowledge but rely on imperfect learning of imitating agents or an algorithmic planner without knowledge about the changed environment by the previous actions.
+        To address the issue, we propose CPEM to incorporate <span style="font-weight:bold">the contextual information</span> of previous actions for planning and maintaining spatial arrangement of objects <span style="font-weight:bold">with their states</span> (e.g., if an object has been moved or not) in an environment to the perception model for improving both visual navigation and object interaction.
+      </p>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <img src='static/figures/overview.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+        </div>
+      </div>
+    </div>
+
+
+    <h3 class="title is-4">Context-aware Planning</h3>
+    <div class="columns is-centered">
+      <div class="column is-two-quarters">
+        <div class="content has-text-justified">
+          <p>
+            To plan a sequence of sub-goals conditioned on the task-relevant objects, we first define `context' as a set of task-relevant objects shared across sub-goals of a given task.
+            The proposed `context-aware planning' (CP) divides planning into two phases; 1) a <span style="font-weight:bold">sub-goal planner</span> which generates sub-goals, and 2) a <span style="font-weight:bold">detailed planner</span> which is responsible for a sequence of detailed actions and objects for interaction for each sub-goal.
+          </p>
+          <p>
+            The sub-goal planner further comprises two sub-modules: the <span style="font-weight:bold">context predictor</span>, which predicts three task-relevant objects, and the <span style="font-weight:bold">sub-goal frame sequence generator</span>, which generates a sequence of sub-goals that do not rely on particular objects, referred to as sub-goal frames.
+            We integrate these predicted task-specific objects into a sequence of sub-goal frames to produce a sub-goal sequence.
+          </p>
+        </div>
+      </div>
+      <div class="column is-two-quarter">
+        <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+      </div>
+    </div>
+    <!--
+    <div class="content has-text-justified">
+      <p>
+        dd
+      </p>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+        </div>
+      </div>
+    </div>
+    -->
+
+    <h3 class="title is-4">Environment-aware Memory</h3>
+    <div class="columns is-centered">
+      <div class="column is-two-quarters">
+        <div class="content has-text-justified">
+          <p>
+            To enable the agent to keep track of the configurations of objects, we propose to configure memory of past environmental information for proper action sequence prediction during a task.
+          </p>
+          <p>
+            <span style="font-weight:bold">Retrospective Object Recognition.</span>
+            To allow the agent to keep interacting with the same object even with the visual appearance changes during multiple interactions, we propose to retain the latest segmentation masks of objects and use them as the current object's mask if the agent is interacting with the same object but fails to recognize it.
+          </p>
+          <p>
+            <span style="font-weight:bold">Object Relocation Tracking.</span>
+            To allow the agent to avoid redundant interaction with already relocated objects, we propose to maintain the information about the most recent location of each relocated object and exclude them in the semantic map as a future target for navigation.
+          </p>
+          <p>
+            <span style="font-weight:bold">Object Location Caching.</span>
+            To reduce the need for agents to explore an environment again, we propose to cache the locations and the masks in memory for objects whose states change such that the agent can navigate back to and interact with the remembered locations and object masks.
+          </p>
+        </div>
+      </div>
+      <div class="column is-two-quarter">
+        <img src='static/figures/em.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+      </div>
+    </div>
+    <!--
+    <div class="content has-text-justified">
+      <p>
+        dd
+      </p>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <img src='static/figures/em.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+</section>
+
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-widescreen">
+      <h2 class="title is-3">Results</h2>
+      <div class="content has-text-justified">
+        <p>
+          We employ <span style="color: #305fac; font-weight:bold"><a href="https://askforalfred.com/">ALFRED</a></span> to evaluate our method.
+          There are three splits of environments in ALFRED: ‘train’, ‘validation’, and ‘test’.
+          The validation and test environments are further divided into two folds, seen and unseen, to assess the generalization capacity.
+          The primary metric is the success rate, denoted by ‘SR,’ which measures the percentage of completed tasks.
+          Another metric is the goal-condition success rate, denoted by ‘GC,’ which measures the percentage of satisfied goal conditions.
+          Finally, path-length-weighted (PLW) scores penalize SR and GC by the length of the actions that the agent takes.
+        </p>
+        <p>
+          When the hand-designed action sequence templates are combined with our agent (<span style="color: #0000ff; font-weight:bold">✓</span> in ‘Tem. Act.’), our agent outperforms all prior arts in novel environments in terms of success rates, which is the main metric of the benchmark.
+          Without using the templated action sequences (<span style="color: #ff0000; font-weight:bold">✗</span> in ‘Tem. Act.’), our method outperforms all prior arts by large margins in SR and GC for both seen and unseen environments.
+          As we consistently observe the improvements with and without the low-level instructions, this would imply that our method does not heavily rely on the detailed description of a task.
+        </p>
+        <p>
+          For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="">paper</a></span>.
+        </p>
+        <br>
+        <div class="columns is-centered has-text-centered">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <img src="static/tables/comparison_with_sota.png" width="800">
+              <h5>Comparison with State-of-the-Art</h5>
+            </div>
+          </div>
+
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <img src="static/figures/qualitative_cp.png" width="650">
+              <h5>Context-aware Planning</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-two-quarter">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-two-quarter">
+                <img src="static/figures/qualitative_ror.png">
+                <h5>Retrospective Object Recognition</h5>
+              </div>
+            </div>
+
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-two-quarter">
+                <img src="static/figures/qualitative_ort.png">
+                <h5>Object Relocation Tracking</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-two-quarter">
+            <img src="static/figures/qualitative_olc.png">
+            <h5>Object Location Caching</h5>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{kim2023context,
+  author    = {Kim, Byeonghwi and Kim, Jinyeon and Kim, Yuyeong and Min, Cheolhong and Choi, Jonghyun},
+  title     = {Context-Aware Planning and Environment-Aware Memory for Instruction Following Embodied Agents},
+  booktitle = {ICCV},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          The website template is from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
