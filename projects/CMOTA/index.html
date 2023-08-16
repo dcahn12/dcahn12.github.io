@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="Story Visualization by Online Text Augmentation with Context Memory">
+  <meta name="keywords" content="Story visualization, Text-to-image generation, Online Augmentation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Context-Aware Planning and Environment-Aware Memory for Instruction Following Embodied Agents</title>
+  <title>Story Visualization by Online Text Augmentation with Context Memory</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -42,7 +42,7 @@
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
@@ -52,7 +52,7 @@
   </div>
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://bhkim94.github.io">
+      <a class="navbar-item" href="https://dcahn12.github.io">
       <span class="icon">
           <i class="fas fa-home"></i>
       </span>
@@ -80,7 +80,7 @@
     </div>
 
   </div>
-</nav>
+</nav> -->
 
 
 <section class="hero">
@@ -89,23 +89,30 @@
       <div class="columns is-centered is-full-width">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title" style="font-size:41px">
-            Context-Aware Planning and Environment-Aware Memory for Instruction Following Embodied Agents
+            Story Visualization by Online Text Augmentation with Context Memory
           </h1>
           <h1 class="title is-4 publication-title">
             ICCV 2023
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://bhkim94.github.io">Byeonghwi Kim</a><sup>1</sup>,
+              <a href="https://dcahn12.github.io">Daechul Ahn</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="">Jinyeon Kim</a><sup>1</sup>,
+              <a href="">Daneul Kim</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://uyeongkim.github.io">Yuyeong Kim</a><sup>2</sup>,
+              <a href="">Gwangmo Song</a><sup>3</sup>,
             </span>
             <span class="author-block">
-              <a href="">Cheolhong Min</a><sup>1</sup>,
+              <a href="">Seung Hwan Kim</a><sup>3</sup>,
+            </span>
+            <br>
+            <span class="author-block">
+                <a href="https://web.eecs.umich.edu/~honglak/">Honglak Lee</a><sup>3,4</sup>,
+            </span>
+            <span class="author-block">
+                <a href="https://dykang.github.io">Dongyeop Kang</a><sup>5</sup>,
             </span>
             <span class="author-block">
               <a href="https://ppolon.github.io">Jonghyun Choi</a><sup>1</sup>
@@ -115,6 +122,10 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Yonsei University,</span>
             <span class="author-block"><sup>2</sup>Gwangju Institute of Science and Technology</span>
+            <span class="author-block"><sup>3</sup>LG AI Research</span>
+            <br>
+            <span class="author-block"><sup>4</sup>University of Michigan</span>
+            <span class="author-block"><sup>5</sup>University of Minnesota</span>
           </div>
 
           <div class="column has-text-centered">
@@ -130,12 +141,21 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2308.07241"
+                <a href="https://arxiv.org/abs/2308.07575"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
                   <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
                 </a>
               </span>
               <!-- Video Link.
@@ -176,7 +196,7 @@
   </div>
 </section>
 
-<section class="hero teaser">
+<!-- <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="title is-4 is-centered has-text-centered">🏆 Challenge Winners 🏆</h2>
@@ -188,7 +208,7 @@
       </h2>
     </div>
   </div>
-</section>
+</section> -->
 
 
 
@@ -201,24 +221,8 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Accomplishing household tasks such as ‘bringing a cup
-              of water’ requires planning step-by-step actions by maintaining knowledge about the spatial arrangement of objects
-              and the consequences of previous actions. Perception models of the current embodied AI agents, however, often make
-              mistakes due to a lack of such knowledge but rely on imperfect learning of imitating agents or an algorithmic planner
-              without knowledge about the changed environment by the
-              previous actions. To address the issue, we propose CPEM
-              (Context-aware Planner and Environment-aware Memory)
-              to incorporate the contextual information of previous
-              actions for planning and maintaining spatial arrangement
-              of objects with their states (e.g., if an object has been
-              moved or not) in an environment to the perception model
-              for improving both visual navigation and object interaction. We observe that CPEM achieves state-of-the-art task
-              success performance in various metrics using a challenging
-              interactive instruction following benchmark both in seen
-              and unseen environments by large margins (up to +10.70%
-              in unseen env.). CPEM with the templated actions, named
-ECLAIR, also won the generalist language grounding
-agents challenge at Embodied AI Workshop in CVPR’23.
+                Story visualization (SV) is a challenging text-to-image generation task for the difficulty of not only rendering visual details from the text descriptions but also encoding a long-term context across multiple sentences. While prior efforts
+                mostly focus on generating a semantically relevant image for each sentence, encoding a context spread across the given paragraph to generate contextually convincing images (e.g., with a correct character or with a proper background of the scene) remains a challenge. To this end, we propose a novel memory architecture for the Bi-directional Transformers with an online text augmentation that generates multiple pseudo-descriptions as supplementary supervision during training, for better generalization to the language variation at inference. In extensive experiments on the two popular SV benchmarks, i.e., the Pororo-SV and Flintstones-SV, the proposed method significantly outperforms the state of the arts in various evaluation metrics including FID, character F1, frame accuracy, BLEU-2/3, and R-precision with similar or less computational complexity.
             </p>
           </div>
         </div>
@@ -244,7 +248,7 @@ agents challenge at Embodied AI Workshop in CVPR’23.
 
 <section class="section">
   <div class="container is-max-widescreen">
-    <h2 class="title is-3">Context-aware Planning and Environment-aware Memory</h2>
+    <h2 class="title is-3">Context Memory with Attentively Weighted </h2>
     <!--
     <div class="columns is-centered">
       <div class="column is-two-quarters">
@@ -350,61 +354,68 @@ agents challenge at Embodied AI Workshop in CVPR’23.
       <h2 class="title is-3">Results</h2>
       <div class="content has-text-justified">
         <p>
-          We employ <span style="color: #305fac; font-weight:bold"><a href="https://askforalfred.com/">ALFRED</a></span> to evaluate our method.
-          There are three splits of environments in ALFRED: ‘train’, ‘validation’, and ‘test’.
-          The validation and test environments are further divided into two folds, seen and unseen, to assess the generalization capacity.
-          The primary metric is the success rate, denoted by ‘SR,’ which measures the percentage of completed tasks.
-          Another metric is the goal-condition success rate, denoted by ‘GC,’ which measures the percentage of satisfied goal conditions.
-          Finally, path-length-weighted (PLW) scores penalize SR and GC by the length of the actions that the agent takes.
+            Following previous works, we compare the performance with prior arts in Pororo-SV and Flintstones-SV dataset on the various metrics, i.e., FID, Character-F1 (Char.F1), Frame Accuracy (Frm.Acc), BLEU-2/3 and R-precision (R-Prc.), and resolutions, i.e., 64 × 64 and 128 x 128. 
+            CMOTA shows overall performance improvement, thereby outperforming existing methods by a large margin in both benchmark datasets.
+            CMOTA-HR outperforms CMOTA with low-resolution (i.e., 64 × 64) in almost all metrics. 
+            However, VLC-HR  drops in all metrics compared to VLC with low-resolution. 
+            Also, in terms of computational cost, our CMOTA gains performance boost by using high-resolution effectively with just adding relatively small computational cost on top of original 64 × 64 model.
         </p>
         <p>
-          When the hand-designed action sequence templates are combined with our agent (<span style="color: #0000ff; font-weight:bold">✓</span> in ‘Tem. Act.’), our agent outperforms all prior arts in novel environments in terms of success rates, which is the main metric of the benchmark.
-          Without using the templated action sequences (<span style="color: #ff0000; font-weight:bold">✗</span> in ‘Tem. Act.’), our method outperforms all prior arts by large margins in SR and GC for both seen and unseen environments.
-          As we consistently observe the improvements with and without the low-level instructions, this would imply that our method does not heavily rely on the detailed description of a task.
+            Comparing VLC-StoryGAN-HR with VLC-StoryGAN in 64 × 64, we see that HR model shows similar performance to 64 × 64 model in Frm.Acc, BLEU, R-prec. 
+            As our CMOTA has superior ability in generating small characters and objects with accurate depiction of background, our CMOTA-HR model shows better score in all metrics except in FID.
+            We can observe the performance drop of FID in both our CMOTA and VLC-StoryGAN. As high-resolution image requires the model to depict fine-grained details, generation task would be more difficult compared to the low-resolution image generation. 
+            Therefore, we believe that the abrupt drop of FID in Flintstones-SV is due to the complicated visual details compared to Pororo-SV dataset. 
+            Nevertheless, the FID drops less with CMOTA than the VLC-StoryGAN in Pororo-SV.
         </p>
         <p>
-          For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="">paper</a></span>.
+            The very recent method VP-CSV performs on par to our CMOTA while ours still outperforms in FID, BLEU and R-precision, implying that CMOTA generates high quality images maintaining global semantic matching between story paragraph and images better than the VP-CSV. 
+            The lower performance than the VP-CSV in Char. F1 score and Frm.
+            Acc. is attributed to the specialized character-centric module that only focuses the model to generate accurate characters for each image at the expense of the other performance metrics.
+        </p>
+        <p>
+          For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/abs/2308.07575" target="_new">paper</a></span>.
         </p>
         <br>
-        <div class="columns is-centered has-text-centered">
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-full-width">
-              <img src="static/tables/comparison_with_sota.png" width="800">
-              <h5>Comparison with State-of-the-Art</h5>
-            </div>
-          </div>
 
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-full-width">
-              <img src="static/figures/qualitative_cp.png" width="650">
-              <h5>Context-aware Planning</h5>
+        <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+            <img src="static/tables/main_table.jpeg" width="900">
+            <h5>Comparison with Prior Arts</h5>
+        </div>
+        </div> -->
+        
+        <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <img src="static/tables/main_table.jpeg" width="800">
+                <h5>Quantitative Comparison with State-of-the-Art</h5>
+              </div>
             </div>
-          </div>
+  
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-full-width">
+                <img src="static/figures/per_char_cla_f1.jpg" width="550">
+                <h5>Per-character Classification F1-score on the Test Split of Pororo-SV Dataset</h5>
+              </div>
+            </div>
         </div>
 
         <div class="columns is-centered has-text-centered">
-          <div class="column is-two-quarter">
             <div class="columns is-centered has-text-centered">
-              <div class="column is-two-quarter">
-                <img src="static/figures/qualitative_ror.png">
-                <h5>Retrospective Object Recognition</h5>
+              <div class="column is-full-width">
+                <img src="static/figures/comparison_prior_arts.jpg" width="600">
+                <h5>Qualitative Comparison with State-of-the-Art</h5>
               </div>
             </div>
-
+  
             <div class="columns is-centered has-text-centered">
-              <div class="column is-two-quarter">
-                <img src="static/figures/qualitative_ort.png">
-                <h5>Object Relocation Tracking</h5>
+              <div class="column is-full-width">
+                <img src="static/figures/memory_efficacy.jpg" width="550">
+                <h5>Benefit of Memory Module in Encoding Background Context</h5>
               </div>
             </div>
-          </div>
-
-          <div class="column is-two-quarter">
-            <img src="static/figures/qualitative_olc.png">
-            <h5>Object Location Caching</h5>
-          </div>
-
         </div>
+
 
       </div>
     </div>
@@ -415,9 +426,9 @@ agents challenge at Embodied AI Workshop in CVPR’23.
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{kim2023context,
-  author    = {Kim, Byeonghwi and Kim, Jinyeon and Kim, Yuyeong and Min, Cheolhong and Choi, Jonghyun},
-  title     = {Context-Aware Planning and Environment-Aware Memory for Instruction Following Embodied Agents},
+    <pre><code>@inproceedings{ahn2023cmota,
+  author    = {Ahn, Daechul and Kim, Daneul and Song, Gwangmo and Kim, Seung Hwan and Lee, Honglak and Kang, Dongyeop and Choi, Jonghyun},
+  title     = {Story Visualization by Online Text Augmentation with Context Memory},
   booktitle = {ICCV},
   year      = {2023},
 }</code></pre>
