@@ -141,7 +141,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2308.07575"
+                <a href="https://arxiv.org/abs/2308.07575" target="_new"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -150,12 +150,12 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href=""
+                <a href="https://github.com/yonseivnl/cmota" target="_new"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (Coming Soon)</span>
+                  <span>Code</span>
                 </a>
               </span>
               <!-- Video Link.
@@ -221,9 +221,19 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-                Story visualization (SV) is a challenging text-to-image generation task for the difficulty of not only rendering visual details from the text descriptions but also encoding a long-term context across multiple sentences. While prior efforts
-                mostly focus on generating a semantically relevant image for each sentence, encoding a context spread across the given paragraph to generate contextually convincing images (e.g., with a correct character or with a proper background of the scene) remains a challenge. To this end, we propose a novel memory architecture for the Bi-directional Transformers with an online text augmentation that generates multiple pseudo-descriptions as supplementary supervision during training, for better generalization to the language variation at inference. In extensive experiments on the two popular SV benchmarks, i.e., the Pororo-SV and Flintstones-SV, the proposed method significantly outperforms the state of the arts in various evaluation metrics including FID, character F1, frame accuracy, BLEU-2/3, and R-precision with similar or less computational complexity.
+                Story visualization (SV) is a challenging text-to-image generation task for the difficulty of not only rendering visual details from the text descriptions but also encoding a long-term context across multiple sentences. 
+                While prior efforts mostly focus on generating a semantically relevant image for each sentence, encoding a context spread across the given paragraph to generate contextually convincing images (e.g., with a correct character or with a proper background of the scene) remains a challenge. 
+                To this end, we propose a novel memory architecture for the Bi-directional Transformers with an online text augmentation that generates multiple pseudo-descriptions as supplementary supervision during training, for better generalization to the language variation at inference. 
+                We call our model as <span style="font-weight:bold">C</span>ontext <span style="font-weight:bold">M</span>emory and <span style="font-weight:bold">O</span>nline <span style="font-weight:bold">T</span>ext <span style="font-weight:bold">A</span>ugmentation or <span style="font-weight:bold">CMOTA</span> for short.
+                In extensive experiments on the two popular SV benchmarks, i.e., the Pororo-SV and Flintstones-SV, the proposed method significantly outperforms the state of the arts in various evaluation metrics including FID, character F1, frame accuracy, BLEU-2/3, and R-precision with similar or less computational complexity.
             </p>
+            <!-- <br> -->
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-fullwidth">
+                <img src='static/figures/teaser.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:85%">
+                <h5>Context encoding by 'Context Memory' and Robust to liguistic diversity by 'Online Text-Augmentation'</h5>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -248,7 +258,7 @@
 
 <section class="section">
   <div class="container is-max-widescreen">
-    <h2 class="title is-3">Context Memory with Attentively Weighted </h2>
+    <h2 class="title is-3">Context Memory with Attentively Weighted Connection</h2>
     <!--
     <div class="columns is-centered">
       <div class="column is-two-quarters">
@@ -265,86 +275,88 @@
     -->
     <div class="content has-text-justified">
       <p>
-        Perception models of the current embodied AI agents, however, often make mistakes due to a lack of such knowledge but rely on imperfect learning of imitating agents or an algorithmic planner without knowledge about the changed environment by the previous actions.
-        To address the issue, we propose CPEM to incorporate <span style="font-weight:bold">the contextual information</span> of previous actions for planning and maintaining spatial arrangement of objects <span style="font-weight:bold">with their states</span> (e.g., if an object has been moved or not) in an environment to the perception model for improving both visual navigation and object interaction.
+        Story visualization task is challenging for the requirement of rendering the visual details in images with convincing background of a scene – seasonal elements, environmental objects such as table, location, and the proper character appearing, which here we refer to as <span style="font-weight:bold">context</span>, spread across the given text sentences. 
+        To better encode such semantic context, e.g., plausible background and characters, we propose a new memory architecture, call it as <span style="font-weight:bold">context memory</span>.
+        In particular, we utilize transformer architecture with explicitly connecting last layers for propagating historical information, i.e., context spread across multiple sentences of paragraph.
+        Additionally, not all historic information is equally important for generating an image at a time step. Similar to the masked self-attention, we attentively weight the past information for better modeling of sparse context, i.e., <span style="font-weight:bold">attentively weighted memory</span>.
+        By utilizing this, we fuse the contextual memory information into current state, thereby generating temporally coherent and semantically relevant sequence.
       </p>
       <div class="columns is-centered has-text-centered">
         <div class="column is-fullwidth">
-          <img src='static/figures/overview.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+          <img src='static/figures/context_memory.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%">
         </div>
       </div>
     </div>
 
+  </div>
 
-    <h3 class="title is-4">Context-aware Planning</h3>
-    <div class="columns is-centered">
-      <div class="column is-two-quarters">
-        <div class="content has-text-justified">
-          <p>
-            To plan a sequence of sub-goals conditioned on the task-relevant objects, we first define `context' as a set of task-relevant objects shared across sub-goals of a given task.
-            The proposed `context-aware planning' (CP) divides planning into two phases; 1) a <span style="font-weight:bold">sub-goal planner</span> which generates sub-goals, and 2) a <span style="font-weight:bold">detailed planner</span> which is responsible for a sequence of detailed actions and objects for interaction for each sub-goal.
-          </p>
-          <p>
-            The sub-goal planner further comprises two sub-modules: the <span style="font-weight:bold">context predictor</span>, which predicts three task-relevant objects, and the <span style="font-weight:bold">sub-goal frame sequence generator</span>, which generates a sequence of sub-goals that do not rely on particular objects, referred to as sub-goal frames.
-            We integrate these predicted task-specific objects into a sequence of sub-goal frames to produce a sub-goal sequence.
-          </p>
-        </div>
-      </div>
-      <div class="column is-two-quarter">
-        <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
-      </div>
-    </div>
-    <!--
-    <div class="content has-text-justified">
+  <br><br>
+
+  <div class="container is-max-widescreen">
+    <h2 class="title is-3">Online Text-Augmentation</h2>
       <p>
-        dd
+        We further propose to generate pseudo-texts during the learning process to augment (online-augmentation) for better linguistic generalization without requiring large external data by learning the bi-directional Transformers in both directions of generating images from texts and vice versa.
       </p>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-fullwidth">
-          <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+      <br>
+      <h3 class="title is-4">Bi-directional Transformer</h3>
+      <div class="columns is-centered">
+        <div class="column is-two-quarters">
+          <div class="content has-text-justified">
+            <p>
+              We use bi-directional (i.e., multi-modal) transformer that iteratively generates images and texts in an unified architecture. 
+              Similar to DALL-E (Ramesh et al., ICML'21), the image tokens are sequentially predicted from the input text sequences by the Transformer. 
+              Then the decoder of the VQ-VAE translates the predicted image tokens into image sequence. 
+              The text tokens are also sequentially predicted from the input image token sequence by the same Transformer. 
+              Particularly, for the bi-directional multi-modal generation, we add two embeddings; a positional embedding for absolute position between tokens and a segment embedding for distinguishing source and target modality.
+            </p>
+          </div>
+        </div>
+        <div class="column is-two-quarter">
+          <img src='static/figures/bidirectional_tr.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:90%;max-width:80%">
+        </div>
+      </div>
+      <!--
+      <div class="content has-text-justified">
+        <p>
+          dd
+        </p>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+          </div>
+        </div>
+      </div>
+      -->
+
+      <h3 class="title is-4">Online Text-Augmentation</h3>
+      <div class="columns is-centered">
+        <div class="column is-two-quarters">
+          <div class="content has-text-justified">
+            <p>
+              Thanks to our bi-directional Transformers architecture, we can naturally integrate the process of generating pseudo-texts to the process of learning image-to-text model and the text-to-image generation model. 
+              In the early epochs, less meaningful sentences are generated, but as training progresses, more meaningful sentences are generated. 
+              As a side-product, by supervising the model learning with intermediate goals at each time step, we expect to expedite the convergence of learning.
+            </p>
+          </div>
+        </div>
+        <div class="column is-two-quarter">
+          <img src='static/figures/ota_simple.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+        </div>
+      </div>
+      <!--
+      <div class="content has-text-justified">
+        <p>
+          dd
+        </p>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <img src='static/figures/em.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
+          </div>
         </div>
       </div>
     </div>
     -->
-
-    <h3 class="title is-4">Environment-aware Memory</h3>
-    <div class="columns is-centered">
-      <div class="column is-two-quarters">
-        <div class="content has-text-justified">
-          <p>
-            To enable the agent to keep track of the configurations of objects, we propose to configure memory of past environmental information for proper action sequence prediction during a task.
-          </p>
-          <p>
-            <span style="font-weight:bold">Retrospective Object Recognition.</span>
-            To allow the agent to keep interacting with the same object even with the visual appearance changes during multiple interactions, we propose to retain the latest segmentation masks of objects and use them as the current object's mask if the agent is interacting with the same object but fails to recognize it.
-          </p>
-          <p>
-            <span style="font-weight:bold">Object Relocation Tracking.</span>
-            To allow the agent to avoid redundant interaction with already relocated objects, we propose to maintain the information about the most recent location of each relocated object and exclude them in the semantic map as a future target for navigation.
-          </p>
-          <p>
-            <span style="font-weight:bold">Object Location Caching.</span>
-            To reduce the need for agents to explore an environment again, we propose to cache the locations and the masks in memory for objects whose states change such that the agent can navigate back to and interact with the remembered locations and object masks.
-          </p>
-        </div>
-      </div>
-      <div class="column is-two-quarter">
-        <img src='static/figures/em.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
-      </div>
-    </div>
-    <!--
-    <div class="content has-text-justified">
-      <p>
-        dd
-      </p>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-fullwidth">
-          <img src='static/figures/em.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
-        </div>
-      </div>
-    </div>
   </div>
-  -->
 </section>
 
 
@@ -354,24 +366,31 @@
       <h2 class="title is-3">Results</h2>
       <div class="content has-text-justified">
         <p>
+          Following previous works, we compare the performance with prior arts in Pororo-SV and Flintstones-SV dataset on the various metrics, i.e., FID, Character-F1 (Char.F1), Frame Accuracy (Frm.Acc), BLEU-2/3 and R-precision (R-Prc.), and resolutions, i.e., 64 × 64 and 128 x 128.
+          CMOTA shows overall performance improvement, thereby outperforming existing methods by a large margin in both benchmark datasets.
+          Also, our CMOTA generates qualitatively more plausible image sequence with better visual quality, compared to prior works.
+          Further, we observe the advatage of using memory architecture.
+          With the context memory, our CMOTA generates a semantically more plausible image sequence with proper context, e.g., background, while the CMOTA without memory fails to capture proper background context since a single sentence could be interpreted in many ways.
+        </p>
+        <!-- <p>
             Following previous works, we compare the performance with prior arts in Pororo-SV and Flintstones-SV dataset on the various metrics, i.e., FID, Character-F1 (Char.F1), Frame Accuracy (Frm.Acc), BLEU-2/3 and R-precision (R-Prc.), and resolutions, i.e., 64 × 64 and 128 x 128. 
             CMOTA shows overall performance improvement, thereby outperforming existing methods by a large margin in both benchmark datasets.
             CMOTA-HR outperforms CMOTA with low-resolution (i.e., 64 × 64) in almost all metrics. 
             However, VLC-HR  drops in all metrics compared to VLC with low-resolution. 
             Also, in terms of computational cost, our CMOTA gains performance boost by using high-resolution effectively with just adding relatively small computational cost on top of original 64 × 64 model.
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
             Comparing VLC-StoryGAN-HR with VLC-StoryGAN in 64 × 64, we see that HR model shows similar performance to 64 × 64 model in Frm.Acc, BLEU, R-prec. 
             As our CMOTA has superior ability in generating small characters and objects with accurate depiction of background, our CMOTA-HR model shows better score in all metrics except in FID.
             We can observe the performance drop of FID in both our CMOTA and VLC-StoryGAN. As high-resolution image requires the model to depict fine-grained details, generation task would be more difficult compared to the low-resolution image generation. 
             Therefore, we believe that the abrupt drop of FID in Flintstones-SV is due to the complicated visual details compared to Pororo-SV dataset. 
             Nevertheless, the FID drops less with CMOTA than the VLC-StoryGAN in Pororo-SV.
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
             The very recent method VP-CSV performs on par to our CMOTA while ours still outperforms in FID, BLEU and R-precision, implying that CMOTA generates high quality images maintaining global semantic matching between story paragraph and images better than the VP-CSV. 
             The lower performance than the VP-CSV in Char. F1 score and Frm.
             Acc. is attributed to the specialized character-centric module that only focuses the model to generate accurate characters for each image at the expense of the other performance metrics.
-        </p>
+        </p> -->
         <p>
           For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/abs/2308.07575" target="_new">paper</a></span>.
         </p>
@@ -384,34 +403,34 @@
         </div>
         </div> -->
         
+        <!-- <div class="columns is-centered has-text-centered"> -->
         <div class="columns is-centered has-text-centered">
-            <div class="columns is-centered has-text-centered">
-              <div class="column is-full-width">
-                <img src="static/tables/main_table.jpeg" width="800">
-                <h5>Quantitative Comparison with State-of-the-Art</h5>
-              </div>
-            </div>
+          <div class="column is-full-width">
+            <img src="static/tables/main_table.jpeg" width="1000">
+            <h5>Quantitative Comparison with State-of-the-Art</h5>
+          </div>
+        </div>
   
-            <div class="columns is-centered has-text-centered">
+            <!-- <div class="columns is-centered has-text-centered">
               <div class="column is-full-width">
                 <img src="static/figures/per_char_cla_f1.jpg" width="550">
                 <h5>Per-character Classification F1-score on the Test Split of Pororo-SV Dataset</h5>
               </div>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
 
         <div class="columns is-centered has-text-centered">
             <div class="columns is-centered has-text-centered">
               <div class="column is-full-width">
-                <img src="static/figures/comparison_prior_arts.jpg" width="600">
+                <img src="static/figures/comparison_prior_arts.jpg" width="500">
                 <h5>Qualitative Comparison with State-of-the-Art</h5>
               </div>
             </div>
   
             <div class="columns is-centered has-text-centered">
               <div class="column is-full-width">
-                <img src="static/figures/memory_efficacy.jpg" width="550">
-                <h5>Benefit of Memory Module in Encoding Background Context</h5>
+                <img src="static/figures/memory_efficacy.jpg" width="500">
+                <h5>Benefit of Memory Module in Encoding Background</h5>
               </div>
             </div>
         </div>
