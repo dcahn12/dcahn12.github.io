@@ -42,47 +42,6 @@
 </head>
 <body>
 
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://dcahn12.github.io">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://bhkim94.github.io/projects/MOCA">
-            MOCA
-          </a>
-          <a class="navbar-item" href="https://bhkim94.github.io/projects/ABP">
-            ABP
-          </a>
-          <a class="navbar-item" href="https://bhkim94.github.io/projects/MCR-Agent">
-            MCR-Agent
-          </a>
-          <a class="navbar-item" href="https://bhkim94.github.io/projects/CPEM">
-            CPEM
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav> -->
-
-
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
@@ -196,22 +155,6 @@
   </div>
 </section>
 
-<!-- <section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <h2 class="title is-4 is-centered has-text-centered">🏆 Challenge Winners 🏆</h2>
-      <h2 class="title is-5 is-centered has-text-centered"> <a href="https://askforalfred.com/EAI23/">1st Generalist Language Grounding Agents Challenge (CVPRW'23)</a> </h2>
-      <br>
-      <img src='static/figures/teaser.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:65%">
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Context-aware Planning and Environment-aware Memory (CPEM)</span>
-      </h2>
-    </div>
-  </div>
-</section> -->
-
-
-
 <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container is-max-desktop">
@@ -259,20 +202,6 @@
 <section class="section">
   <div class="container is-max-widescreen">
     <h2 class="title is-3">Context Memory with Attentively Weighted Connection</h2>
-    <!--
-    <div class="columns is-centered">
-      <div class="column is-two-quarters">
-        <div class="content has-text-justified">
-          <p>
-            dd
-          </p>
-        </div>
-      </div>
-      <div class="column is-two-quarter">
-        <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
-      </div>
-    </div>
-    -->
     <div class="content has-text-justified">
       <p>
         Story visualization task is challenging for the requirement of rendering the visual details in images with convincing background of a scene – seasonal elements, environmental objects such as table, location, and the proper character appearing, which here we refer to as <span style="font-weight:bold">context</span>, spread across the given text sentences. 
@@ -315,18 +244,6 @@
           <img src='static/figures/bidirectional_tr.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:90%;max-width:80%">
         </div>
       </div>
-      <!--
-      <div class="content has-text-justified">
-        <p>
-          dd
-        </p>
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-fullwidth">
-            <img src='static/figures/cp.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
-          </div>
-        </div>
-      </div>
-      -->
 
       <h3 class="title is-4">Online Text-Augmentation</h3>
       <div class="columns is-centered">
@@ -343,19 +260,6 @@
           <img src='static/figures/ota_simple.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
         </div>
       </div>
-      <!--
-      <div class="content has-text-justified">
-        <p>
-          dd
-        </p>
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-fullwidth">
-            <img src='static/figures/em.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:70%">
-          </div>
-        </div>
-      </div>
-    </div>
-    -->
   </div>
 </section>
 
@@ -372,52 +276,17 @@
           Further, we observe the advatage of using memory architecture.
           With the context memory, our CMOTA generates a semantically more plausible image sequence with proper context, e.g., background, while the CMOTA without memory fails to capture proper background context since a single sentence could be interpreted in many ways.
         </p>
-        <!-- <p>
-            Following previous works, we compare the performance with prior arts in Pororo-SV and Flintstones-SV dataset on the various metrics, i.e., FID, Character-F1 (Char.F1), Frame Accuracy (Frm.Acc), BLEU-2/3 and R-precision (R-Prc.), and resolutions, i.e., 64 × 64 and 128 x 128. 
-            CMOTA shows overall performance improvement, thereby outperforming existing methods by a large margin in both benchmark datasets.
-            CMOTA-HR outperforms CMOTA with low-resolution (i.e., 64 × 64) in almost all metrics. 
-            However, VLC-HR  drops in all metrics compared to VLC with low-resolution. 
-            Also, in terms of computational cost, our CMOTA gains performance boost by using high-resolution effectively with just adding relatively small computational cost on top of original 64 × 64 model.
-        </p> -->
-        <!-- <p>
-            Comparing VLC-StoryGAN-HR with VLC-StoryGAN in 64 × 64, we see that HR model shows similar performance to 64 × 64 model in Frm.Acc, BLEU, R-prec. 
-            As our CMOTA has superior ability in generating small characters and objects with accurate depiction of background, our CMOTA-HR model shows better score in all metrics except in FID.
-            We can observe the performance drop of FID in both our CMOTA and VLC-StoryGAN. As high-resolution image requires the model to depict fine-grained details, generation task would be more difficult compared to the low-resolution image generation. 
-            Therefore, we believe that the abrupt drop of FID in Flintstones-SV is due to the complicated visual details compared to Pororo-SV dataset. 
-            Nevertheless, the FID drops less with CMOTA than the VLC-StoryGAN in Pororo-SV.
-        </p> -->
-        <!-- <p>
-            The very recent method VP-CSV performs on par to our CMOTA while ours still outperforms in FID, BLEU and R-precision, implying that CMOTA generates high quality images maintaining global semantic matching between story paragraph and images better than the VP-CSV. 
-            The lower performance than the VP-CSV in Char. F1 score and Frm.
-            Acc. is attributed to the specialized character-centric module that only focuses the model to generate accurate characters for each image at the expense of the other performance metrics.
-        </p> -->
         <p>
           For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/abs/2308.07575" target="_new">paper</a></span>.
         </p>
         <br>
 
-        <!-- <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-            <img src="static/tables/main_table.jpeg" width="900">
-            <h5>Comparison with Prior Arts</h5>
-        </div>
-        </div> -->
-        
-        <!-- <div class="columns is-centered has-text-centered"> -->
         <div class="columns is-centered has-text-centered">
           <div class="column is-full-width">
             <img src="static/tables/main_table.jpeg" width="1000">
             <h5>Quantitative Comparison with State-of-the-Art</h5>
           </div>
         </div>
-  
-            <!-- <div class="columns is-centered has-text-centered">
-              <div class="column is-full-width">
-                <img src="static/figures/per_char_cla_f1.jpg" width="550">
-                <h5>Per-character Classification F1-score on the Test Split of Pororo-SV Dataset</h5>
-              </div>
-            </div> -->
-        <!-- </div> -->
 
         <div class="columns is-centered has-text-centered">
             <div class="columns is-centered has-text-centered">
