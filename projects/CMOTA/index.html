@@ -206,7 +206,7 @@
       <p>
         Story visualization task is challenging for the requirement of rendering the visual details in images with convincing background of a scene – seasonal elements, environmental objects such as table, location, and the proper character appearing, which here we refer to as <span style="font-weight:bold">context</span>, spread across the given text sentences. 
         To better encode such semantic context, e.g., plausible background and characters, we propose a new memory architecture, call it as <span style="font-weight:bold">context memory</span>.
-        In particular, we utilize transformer architecture with explicitly connecting last layers for propagating historical information, i.e., context spread across multiple sentences of paragraph.
+        In particular, we utilize transformer architecture with explicitly connecting last layers for propagating historical information.
         Additionally, not all historic information is equally important for generating an image at a time step. Similar to the masked self-attention, we attentively weight the past information for better modeling of sparse context, i.e., <span style="font-weight:bold">attentively weighted memory</span>.
         By utilizing this, we fuse the contextual memory information into current state, thereby generating temporally coherent and semantically relevant sequence.
       </p>
