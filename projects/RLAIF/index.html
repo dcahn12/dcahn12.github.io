@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Story Visualization by Online Text Augmentation with Context Memory">
-  <meta name="keywords" content="Story visualization, Text-to-image generation, Online Augmentation">
+        content="Tuning Large Multimodal Models for Videos using Reinforcement Learning from AI Feedback">
+  <meta name="keywords" content="Multimodal Alignment, Video Multimodal Large Model, Reinforcement Learning from AI Feedback">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Story Visualization by Online Text Augmentation with Context Memory</title>
+  <title>Tuning Large Multimodal Models for Videos using Reinforcement Learning from AI Feedback</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -48,59 +48,49 @@
       <div class="columns is-centered is-full-width">
         <div class="column has-text-centered">
           <h1 class="title is-1 publication-title" style="font-size:41px">
-            Story Visualization by Online Text Augmentation with Context Memory
+            Tuning Large Multimodal Models for Videos using Reinforcement Learning from AI Feedback
           </h1>
           <h1 class="title is-4 publication-title">
-            ICCV 2023
+            ACL 2024
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://dcahn12.github.io">Daechul Ahn</a><sup>1</sup>,
+              <a href="https://dcahn12.github.io" target="_new">Daechul Ahn</a><sup>1,3</sup>,
             </span>
             <span class="author-block">
-              <a href="">Daneul Kim</a><sup>2</sup>,
+              <a href="https://yuuraa.github.io" target="_new">Yura Choi</a><sup>1,3</sup>,
             </span>
             <span class="author-block">
-              <a href="">Gwangmo Song</a><sup>3</sup>,
+              <a href="https://yj-yu.github.io/home/" target="_new">Youngjae Yu</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="">Seung Hwan Kim</a><sup>3</sup>,
-            </span>
-            <br>
-            <span class="author-block">
-                <a href="https://web.eecs.umich.edu/~honglak/">Honglak Lee</a><sup>3,4</sup>,
+              <a href="https://dykang.github.io" target="_new">Dongyeop Kang</a><sup>2</sup>,
             </span>
             <span class="author-block">
-                <a href="https://dykang.github.io">Dongyeop Kang</a><sup>5</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://ppolon.github.io">Jonghyun Choi</a><sup>1</sup>
+              <a href="https://ppolon.github.io">Jonghyun Choi</a><sup>3</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Yonsei University,</span>
-            <span class="author-block"><sup>2</sup>Gwangju Institute of Science and Technology</span>
-            <span class="author-block"><sup>3</sup>LG AI Research</span>
-            <br>
-            <span class="author-block"><sup>4</sup>University of Michigan</span>
             <span class="author-block"><sup>5</sup>University of Minnesota</span>
+            <span class="author-block"><sup>5</sup>Seoul National University</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://openaccess.thecvf.com/content/ICCV2023/papers/Ahn_Story_Visualization_by_Online_Text_Augmentation_with_Context_Memory_ICCV_2023_paper.pdf" target="_new"
+                <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Paper (Coming Soon)</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2308.07575" target="_new"
+                <a href="https://arxiv.org/pdf/2402.03746" target="_new"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -109,7 +99,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://github.com/yonseivnl/cmota" target="_new"
+                <a href="https://github.com/yonseivnl/vlm-rlaif" target="_new"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -164,17 +154,19 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-                Story visualization (SV) is a challenging text-to-image generation task for the difficulty of not only rendering visual details from the text descriptions but also encoding a long-term context across multiple sentences. 
-                While prior efforts mostly focus on generating a semantically relevant image for each sentence, encoding a context spread across the given paragraph to generate contextually convincing images (e.g., with a correct character or with a proper background of the scene) remains a challenge. 
-                To this end, we propose a novel memory architecture for the Bi-directional Transformers with an online text augmentation that generates multiple pseudo-descriptions as supplementary supervision during training, for better generalization to the language variation at inference. 
-                We call our model as <span style="font-weight:bold">C</span>ontext <span style="font-weight:bold">M</span>emory and <span style="font-weight:bold">O</span>nline <span style="font-weight:bold">T</span>ext <span style="font-weight:bold">A</span>ugmentation or <span style="font-weight:bold">CMOTA</span> for short.
-                In extensive experiments on the two popular SV benchmarks, i.e., the Pororo-SV and Flintstones-SV, the proposed method significantly outperforms the state of the arts in various evaluation metrics including FID, character F1, frame accuracy, BLEU-2/3, and R-precision with similar or less computational complexity.
+                Recent advancements in large language models have influenced the development of video large multimodal models (VLMMs). 
+                Previous approaches for VLMMs involve Supervised Fine-Tuning (SFT) with instruction-tuned datasets, integrating LLM with visual encoders, and additional learnable parameters. 
+                Here, aligning video with text, and vice versa, remains a challenge, primarily due to the insufficient quality and quantity of multimodal instruction-tune data compared to that of text-only. 
+                This discrepancy often results in alignments that poorly ground the video content. 
+                To address this, we present a novel alignment strategy that employs a multimodal AI system equipped with Reinforcement Learning from AI Feedback (RLAIF), providing self-preference feedback to refine itself and facilitating the alignment of video and text modalities. 
+                Our approach uniquely integrates detailed video descriptions as context into a multimodal AI system during preference feedback generation to enrich the understanding of video content, a process we call context-aware reward modeling. 
+                Empirical evaluations on various video benchmarks demonstrate that our proposed method outperforms existing approaches, including the SFT model.
             </p>
             <!-- <br> -->
             <div class="columns is-centered has-text-centered">
               <div class="column is-fullwidth">
-                <img src='static/figures/teaser.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:85%">
-                <h5>Context encoding by 'Context Memory' and Robust to liguistic diversity by 'Online Text-Augmentation'</h5>
+                <img src='static/figures/rlaif_feedback_teaser.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+                <h5>Illustration of the proposed VLM-RLAIF</h5>
               </div>
             </div>
           </div>
@@ -201,7 +193,7 @@
 
 <section class="section">
   <div class="container is-max-widescreen">
-    <h2 class="title is-3">Context Memory with Attentively Weighted Connection</h2>
+    <h2 class="title is-3">VLM-RLAIF Framework</h2>
     <div class="content has-text-justified">
       <p>
         Story visualization task is challenging for the requirement of rendering the visual details in images with convincing background of a scene – seasonal elements, environmental objects such as table, location, and the proper character appearing, which here we refer to as <span style="font-weight:bold">context</span>, spread across the given text sentences. 
@@ -314,15 +306,14 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{ahn2023cmota,
-  author    = {Ahn, Daechul and Kim, Daneul and Song, Gwangmo and Kim, Seung Hwan and Lee, Honglak and Kang, Dongyeop and Choi, Jonghyun},
-  title     = {Story Visualization by Online Text Augmentation with Context Memory},
-  booktitle = {ICCV},
-  year      = {2023},
+    <pre><code>@inproceedings{ahnCYKC24,
+  author    = {Ahn, Daechul and Choi, Yura and Yu, Youngjae and Kang, Dongyeop and Choi, Jonghyun},
+  title     = {Tuning Large Multimodal Models for Videos using Reinforcement Learning from AI Feedback},
+  booktitle = {ACL},
+  year      = {2024},
 }</code></pre>
   </div>
 </section>
-
 
 <footer class="footer">
   <div class="container">
