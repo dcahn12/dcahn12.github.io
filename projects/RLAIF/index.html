@@ -165,8 +165,8 @@
             <!-- <br> -->
             <div class="columns is-centered has-text-centered">
               <div class="column is-fullwidth">
-                <img src='static/figures/rlaif_feedback_teaser.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
-                <h5>Illustration of the proposed VLM-RLAIF</h5>
+                <img src='static/figures/radar.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%">
+                <h5>Quantitative comparison of VLMMs on various video benchmarks</h5>
               </div>
             </div>
           </div>
@@ -196,15 +196,33 @@
     <h2 class="title is-3">VLM-RLAIF Framework</h2>
     <div class="content has-text-justified">
       <p>
-        Story visualization task is challenging for the requirement of rendering the visual details in images with convincing background of a scene – seasonal elements, environmental objects such as table, location, and the proper character appearing, which here we refer to as <span style="font-weight:bold">context</span>, spread across the given text sentences. 
-        To better encode such semantic context, e.g., plausible background and characters, we propose a new memory architecture, call it as <span style="font-weight:bold">context memory</span>.
-        In particular, we utilize transformer architecture with explicitly connecting last layers for propagating historical information.
-        Additionally, not all historic information is equally important for generating an image at a time step. Similar to the masked self-attention, we attentively weight the past information for better modeling of sparse context, i.e., <span style="font-weight:bold">attentively weighted memory</span>.
-        By utilizing this, we fuse the contextual memory information into current state, thereby generating temporally coherent and semantically relevant sequence.
+        To overcome the limited scalability of human feedback in RLHF, we use AI’s feedback to align multimodality between video and text, reducing the reliance on exhaustive human-annotated preferences. 
+        The training procedure of VLM-RLAIF can be summarized into three stages as follows:
+        <h5 class="title is-4">1) Supervised fine-tuning (SFT)</h5>
+          <p>
+            We first fine-tune an LLM, e.g., Vicuna, using supervised learning on synthetically generated video-text instruction-tune data. 
+            This involves the integration of a vision encoder with two linear layers and additional learnable parameters using LoRA, into the training process. 
+            This fine-tuning allows the model to better follow the instructions.
+            Additionally, we improve the SFT process by expanding the instruction-tune data and introducing simple curriculum learning. 
+            We refer to this fine-tuned model as the Video Large Multimodal model with SFT or <span style="font-weight:bold">VLM-SFT</span> for short.
+          </p>
+        <h5 class="title is-4">2) Reward modeling with AI feedback</h5>
+          <p>
+            A key aspect of the RLAIF involves leveraging a pre-trained AI model to generate human-like preferences between different responses generated from the same input.
+            To obtain human-like preference, we employ the VLM-SFT as a judge to assess preferences. 
+            Once preferences are judged, we train a reward model (RM) based on preferences using a cross-entropy loss, following the Bradley-Terry model for estimating score functions from pairwise preferences.
+            The RM give higher score reward to the better response and lower score reward to the less appropriate one in a pair of responses, thus guiding the policy model using reinforcement learning.
+          </p>
+        <h5 class="title is-4">3) Reinforcement learning from AI feedback</h5>
+          <p>
+            We finally fine-tune a supervised policy model, initialized from the VLM-SFT, aiming to optimize the scalar reward output of the trained RM by reinforcement learning. 
+            Specifically, we use the Proximal Policy Optimization (PPO) algorithm.
+          </p>
       </p>
       <div class="columns is-centered has-text-centered">
         <div class="column is-fullwidth">
-          <img src='static/figures/context_memory.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%">
+          <img src='static/figures/rlaif_feedback_teaser.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+          <h5>Illustration of the proposed VLM-RLAIF</h5>
         </div>
       </div>
     </div>
@@ -214,30 +232,42 @@
   <br><br>
 
   <div class="container is-max-widescreen">
-    <h2 class="title is-3">Online Text-Augmentation</h2>
+    <h2 class="title is-3">Context-Aware Reward Modeling</h2>
       <p>
-        We further propose to generate pseudo-texts during the learning process to augment (online-augmentation) for better linguistic generalization without requiring large external data by learning the bi-directional Transformers in both directions of generating images from texts and vice versa.
+        For VLM-SFT to select preference grounded on the video, we argue that a <span style="font-weight:bold">detailed understanding of video content</span> is necessary for more accurate and contextually relevant decisions by the VLM-SFT. 
+        However, the current video encoder presents challenges in accurately encoding the temporal details of videos as they are based on the image encoder.
       </p>
       <br>
-      <h3 class="title is-4">Bi-directional Transformer</h3>
+      <!-- <h3 class="title is-4">Context-aware preference selection and Training the reward model</h3> -->
       <div class="columns is-centered">
-        <div class="column is-two-quarters">
+        <div class="column is-two-quarter">
           <div class="content has-text-justified">
             <p>
-              We use bi-directional (i.e., multi-modal) transformer that iteratively generates images and texts in an unified architecture. 
-              Similar to DALL-E (Ramesh et al., ICML'21), the image tokens are sequentially predicted from the input text sequences by the Transformer. 
-              Then the decoder of the VQ-VAE translates the predicted image tokens into image sequence. 
-              The text tokens are also sequentially predicted from the input image token sequence by the same Transformer. 
-              Particularly, for the bi-directional multi-modal generation, we add two embeddings; a positional embedding for absolute position between tokens and a segment embedding for distinguishing source and target modality.
+              We propose integrating detailed video descriptions, termed as <span style="font-weight:bold; font-style: italic;">context</span>, into the preference selection workflow to enhance VLMM's contextual clarity. 
+              The process involves segmenting the video into clips of up to 20 frames each, generating detailed descriptions for each segment using VLM-SFT with the prompt, ‘Describe this video in detail’. 
+              These descriptions are concatenated to form a narrative of the video, which is then provided to a judge model (VLM-SFT) for improved preference selection. 
+              This context allows the VLM-SFT to better understand the video content and identify the most suitable response. 
+              Integrating context with instruction inputs using a specific prompt, as shown in dotted boxes in the right Figure (2), facilitates the collection of context-aware preferences.
+            </p>
+            <p>
+              The right figure illustrates the three stages of the proposed context-aware reward modeling:
+              (1) The SFT model produces two candidate responses from the provided video and question. 
+              (2) With the video, question and responses at hand, the SFT model utilize context information and guiding prompt to evaluate the responses. 
+              (3) The reward model is trained using the preference pairs generated in the previous step as indicated in orange box. 
+              Each stage involves a model's input, indicated by a dotted box, and includes a task-specific prompt, shown in a yellow box. The first stage focuses on response generation, the second on evaluation and selection of the superior response, and the third on training the reward model.
             </p>
           </div>
         </div>
-        <div class="column is-two-quarter">
-          <img src='static/figures/bidirectional_tr.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:90%;max-width:80%">
+        <div class="column is-fullwidth">
+          <img src='static/figures/reward_modeling.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:85%">
+          <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Three stages of the context-aware reward modeling</span>
         </div>
+        <!-- <div class="column is-two-quarter">
+          <img src='static/figures/reward_modeling.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+        </div> -->
       </div>
 
-      <h3 class="title is-4">Online Text-Augmentation</h3>
+      <!-- <h3 class="title is-4">Online Text-Augmentation</h3>
       <div class="columns is-centered">
         <div class="column is-two-quarters">
           <div class="content has-text-justified">
@@ -251,7 +281,7 @@
         <div class="column is-two-quarter">
           <img src='static/figures/ota_simple.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
         </div>
-      </div>
+      </div> -->
   </div>
 </section>
 
@@ -262,38 +292,34 @@
       <h2 class="title is-3">Results</h2>
       <div class="content has-text-justified">
         <p>
-          Following previous works, we compare the performance with prior arts in Pororo-SV and Flintstones-SV dataset on the various metrics, i.e., FID, Character-F1 (Char.F1), Frame Accuracy (Frm.Acc), BLEU-2/3 and R-precision (R-Prc.), and resolutions, i.e., 64 × 64 and 128 x 128.
-          CMOTA shows overall performance improvement, thereby outperforming existing methods by a large margin in both benchmark datasets.
-          Also, our CMOTA generates qualitatively more plausible image sequence with better visual quality, compared to prior works.
-          Further, we observe the advatage of using memory architecture.
-          With the context memory, our CMOTA generates a semantically more plausible image sequence with proper context, e.g., background, while the CMOTA without memory fails to capture proper background context since a single sentence could be interpreted in many ways.
+          Our method’s strength lies in generating synthetic preference feedback in large quantities. 
+          To study the benefit of large-sized data, we sweep the size of preference data from 10k – the same quantity utilized in the multimodal image-text RLHF framework (Sun et al., 2023a) – to 40k. 
+          As expected, we observe monotonic performance increases in video-based generative benchmark task by the increase in data size. 
+
+          Moreover, we qualitatively compares the performance of VLM-SFT and VLM-RLAIF, highlighting their multimodal understanding capabilities below Figure. 
+          VLM-RLAIF consistently yields more accurate answers than VLM-SFT, 
+
+          The VLM-RLAIF yields responses that are more accurately grounded in the visual input, as highlighted in <span style="color: blue;">blue</span> for accurate responses and <span style="color: red;">red</span> for less accurate ones from VLM-SFT.
+
+
         </p>
         <p>
-          For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/abs/2308.07575" target="_new">paper</a></span>.
+          For more details, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2402.03746" target="_new">paper</a></span>.
         </p>
         <br>
 
         <div class="columns is-centered has-text-centered">
           <div class="column is-full-width">
-            <img src="static/tables/main_table.jpeg" width="1000">
-            <h5>Quantitative Comparison with State-of-the-Art</h5>
+            <img src="static/figures/performance_per_dsize.png" width="1200">
+            <h5>Effect of preference data size on video-based generative benchmark</h5>
           </div>
         </div>
 
         <div class="columns is-centered has-text-centered">
-            <div class="columns is-centered has-text-centered">
-              <div class="column is-full-width">
-                <img src="static/figures/comparison_prior_arts.jpg" width="500">
-                <h5>Qualitative Comparison with State-of-the-Art</h5>
-              </div>
-            </div>
-  
-            <div class="columns is-centered has-text-centered">
-              <div class="column is-full-width">
-                <img src="static/figures/memory_efficacy.jpg" width="500">
-                <h5>Benefit of Memory Module in Encoding Background</h5>
-              </div>
-            </div>
+          <div class="column is-full-width">
+            <img src="static/figures/sft_rlaif.png" width="1000">
+            <h5>Examples of the comparative results between VLM-SFT and VLM-RLAIF in video instruction-following task</h5>
+          </div>
         </div>
 
 
