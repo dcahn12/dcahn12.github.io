@@ -73,8 +73,8 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Yonsei University,</span>
-            <span class="author-block"><sup>5</sup>University of Minnesota</span>
-            <span class="author-block"><sup>5</sup>Seoul National University</span>
+            <span class="author-block"><sup>2</sup>University of Minnesota</span>
+            <span class="author-block"><sup>3</sup>Seoul National University</span>
           </div>
 
           <div class="column has-text-centered">
@@ -193,12 +193,12 @@
 
 <section class="section">
   <div class="container is-max-widescreen">
-    <h2 class="title is-3">VLM-RLAIF Framework</h2>
+    <h1 class="title is-3">VLM-RLAIF Framework</h1>
     <div class="content has-text-justified">
       <p>
         To overcome the limited scalability of human feedback in RLHF, we use AI’s feedback to align multimodality between video and text, reducing the reliance on exhaustive human-annotated preferences. 
         The training procedure of VLM-RLAIF can be summarized into three stages as follows:
-        <h5 class="title is-4">1) Supervised fine-tuning (SFT)</h5>
+        <h5 class="title is-5">1) Supervised fine-tuning (SFT)</h5>
           <p>
             We first fine-tune an LLM, e.g., Vicuna, using supervised learning on synthetically generated video-text instruction-tune data. 
             This involves the integration of a vision encoder with two linear layers and additional learnable parameters using LoRA, into the training process. 
@@ -206,14 +206,14 @@
             Additionally, we improve the SFT process by expanding the instruction-tune data and introducing simple curriculum learning. 
             We refer to this fine-tuned model as the Video Large Multimodal model with SFT or <span style="font-weight:bold">VLM-SFT</span> for short.
           </p>
-        <h5 class="title is-4">2) Reward modeling with AI feedback</h5>
+        <h5 class="title is-5">2) Reward modeling with AI feedback</h5>
           <p>
             A key aspect of the RLAIF involves leveraging a pre-trained AI model to generate human-like preferences between different responses generated from the same input.
             To obtain human-like preference, we employ the VLM-SFT as a judge to assess preferences. 
             Once preferences are judged, we train a reward model (RM) based on preferences using a cross-entropy loss, following the Bradley-Terry model for estimating score functions from pairwise preferences.
             The RM give higher score reward to the better response and lower score reward to the less appropriate one in a pair of responses, thus guiding the policy model using reinforcement learning.
           </p>
-        <h5 class="title is-4">3) Reinforcement learning from AI feedback</h5>
+        <h5 class="title is-5">3) Reinforcement learning from AI feedback</h5>
           <p>
             We finally fine-tune a supervised policy model, initialized from the VLM-SFT, aiming to optimize the scalar reward output of the trained RM by reinforcement learning. 
             Specifically, we use the Proximal Policy Optimization (PPO) algorithm.
@@ -232,7 +232,7 @@
   <br><br>
 
   <div class="container is-max-widescreen">
-    <h2 class="title is-3">Context-Aware Reward Modeling</h2>
+    <h3 class="title is-4">Context-Aware Reward Modeling</h3>
       <p>
         For VLM-SFT to select preference grounded on the video, we argue that a <span style="font-weight:bold">detailed understanding of video content</span> is necessary for more accurate and contextually relevant decisions by the VLM-SFT. 
         However, the current video encoder presents challenges in accurately encoding the temporal details of videos as they are based on the image encoder.
