@@ -181,7 +181,7 @@
         <div class="column is-full-width">
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
-            <p>
+            <!-- <p>
                 Recent advancements in large language models have influenced the development of video large multimodal models (VLMMs). 
                 Previous approaches for VLMMs involve Supervised Fine-Tuning (SFT) with instruction-tuned datasets, integrating LLM with visual encoders, and additional learnable parameters. 
                 Here, aligning video with text, and vice versa, remains a challenge, primarily due to the insufficient quality and quantity of multimodal instruction-tune data compared to that of text-only. 
@@ -189,7 +189,21 @@
                 To address this, we present a novel alignment strategy that employs a multimodal AI system equipped with Reinforcement Learning from AI Feedback (RLAIF), providing self-preference feedback to refine itself and facilitating the alignment of video and text modalities. 
                 Our approach uniquely integrates detailed video descriptions as context into a multimodal AI system during preference feedback generation to enrich the understanding of video content, a process we call context-aware reward modeling. 
                 Empirical evaluations on various video benchmarks demonstrate that our proposed method outperforms existing approaches, including the SFT model.
+            </p> -->
+            <p>
+              Recent advancements in Large Language Models (LLMs) have driven the development of Video Large Multimodal models (VLMs). 
+              While Supervised Fine-Tuning (SFT) for multimodal alignment between video and text has shown promise, challenges persist. 
+              The primary obstacle is the scarcity of high-quality video-text instruction-tune data, often resulting in poor grounding of video. 
+              Addressing this is crucial for successfully applying VLMs to various real-world video understanding tasks.
             </p>
+            <ol type="1">
+                <li><b>VLM-RLAIF</b>. <span style="font-size: 95%;">We propose a novel alignment method for VLMMs utilizing Reinforcement Learning from AI Feedback (RLAIF) to effectively align video-text modalities. </span></li>
+                <li><b>Context-Aware Reward Modeling</b>. <span style="font-size: 95%;">We enhance AI's feedback by introducing context-aware reward modeling, focusing on improved clarity and comprehension in video content understanding. </span></li>  
+                <li><b>Enhanced SFT Training</b>. <span style="font-size: 95%;">We enrich the Supervised Fine-Tuning (SFT) model's training by introducing additional instruction-tune data and applying a simple curriculum strategy. </span></li>
+                <li><b>Performance</b>. <span style="font-size: 95%;">We demonstrate the effectiveness of our proposed VLM-RLAIF approach on various video understanding benchmarks, showing noticeable improvements over existing methods including SFT model. </span></li>
+                <li><b>Open-source</b>. <span style="font-size: 95%;">We make AI preference data, additional visual instruction tuning data (for curriculum learning), our model and code base publicly available. </span></li>
+            </ol>  
+            <p></p>
             <!-- <br> -->
             <div class="columns is-centered has-text-centered">
               <div class="column is-fullwidth">
