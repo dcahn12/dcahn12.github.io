@@ -249,8 +249,8 @@
     <h1 class="title is-3">VLM-RLAIF Framework</h1>
     <div class="content has-text-justified">
       <p>
-        To overcome the limited scalability of human feedback in RLHF, we use AI’s feedback to align multimodality between video and text, reducing the reliance on exhaustive human-annotated preferences. 
-        The training procedure of VLM-RLAIF can be summarized into three stages as follows:
+        <!-- To overcome the limited scalability of human feedback in RLHF, we use AI’s feedback to align multimodality between video and text, reducing the reliance on exhaustive human-annotated preferences. 
+        The training procedure of VLM-RLAIF can be summarized into three stages as follows: -->
         <h5 class="title is-5">1) Supervised fine-tuning (SFT)</h5>
           <p>
             We first fine-tune an LLM, e.g., Vicuna, using supervised learning on synthetically generated video-text instruction-tune data. 
@@ -366,28 +366,32 @@
   <div class="hero-body">
     <div class="container is-max-widescreen">
       <h2 class="title is-3">Results</h2>
+      For more experimental results, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2402.03746" target="_new">paper</a></span>.
       <div class="content has-text-justified">
-        <p>
-          We quantitatively evaluate VLMMs on the video-based generative performance benchmark that measures five criteria of generated text. 
-          In specific, these assess the relevance of the model’s output to the video content, its capacity to capture essential details and contextual information, its understanding of temporal sequences, and the consistency in responding to varied yet related queries. 
-        </p>
-        <p>
-          We qualitatively compares the performance of VLM-SFT and VLM-RLAIF, highlighting their multimodal understanding capabilities below Figure. 
-          VLM-RLAIF consistently yields more accurate answers than VLM-SFT, 
-          The VLM-RLAIF yields responses that are more accurately grounded in the visual input, as highlighted in <span style="color: blue;">blue</span> for accurate responses and <span style="color: red;">red</span> for less accurate ones from VLM-SFT.
-        </p>
-        <p>
-          For more experiments, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2402.03746" target="_new">paper</a></span>.
-        </p>
         <br>
+        <h5 class="title is-5">1) Quantitative comparison with prior arts</h5>
+          <p>
+            We quantitatively evaluate VLMMs on the video-based generative performance benchmark that measures five criteria of generated text, showing effectiveness of our proposed VLM-RLAIF. 
+            <!-- In specific, five criteria assess the relevance of the model’s output to the video content, its capacity to capture essential details and contextual information, its understanding of temporal sequences, and the consistency in responding to varied yet related queries.  -->
+          </p>
 
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width">
-            <img src="static/tables/rlaif_result.jpg" width="1200">
-            <h5>Quantitative comparison between different VLMMs on video-based generative performance benchmark</h5>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <img src="static/tables/rlaif_result.jpg" width="1200">
+              <h5>Quantitative comparison between different VLMMs on video-based generative performance benchmark</h5>
+            </div>
           </div>
-        </div>
 
+
+        <h5 class="title is-5">2) Qualitative comparison between VLM-SFT and VLM-RLAIF</h5> 
+          <p>
+            We qualitatively compares the performance of VLM-SFT and VLM-RLAIF, highlighting their multimodal understanding capabilities below Figure. 
+            VLM-RLAIF consistently yields more accurate answers than VLM-SFT, as highlighted in <span style="color: blue;">blue</span> for accurate responses and <span style="color: red;">red</span> for less accurate ones.
+          </p>
+        <!-- <p>
+          For more experiments, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2402.03746" target="_new">paper</a></span>.
+        </p> -->
+        <!-- <br> -->
         <div class="columns is-centered has-text-centered">
           <div class="column is-full-width">
             <img src="static/figures/sft_rlaif.png" width="1000">
