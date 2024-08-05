@@ -39,6 +39,8 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.12.0/gradio.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.35.2/gradio.js"></script>
 </head>
 <body>
 
@@ -108,12 +110,12 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="" target=""
+                <a href="https://huggingface.co/spaces/SNUMPR/vlm-rlaif-demo" target="_new"
                    class="external-link button is-normal is-rounded is-dark">
                    <span class="icon">
                     <svg class="svg-inline--fa fa-images fa-w-18" aria-hidden="true" focusable="false" data-prefix="far" data-icon="images" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M480 416v16c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V176c0-26.51 21.49-48 48-48h16v48H54a6 6 0 0 0-6 6v244a6 6 0 0 0 6 6h372a6 6 0 0 0 6-6v-10h48zm42-336H150a6 6 0 0 0-6 6v244a6 6 0 0 0 6 6h372a6 6 0 0 0 6-6V86a6 6 0 0 0-6-6zm6-48c26.51 0 48 21.49 48 48v256c0 26.51-21.49 48-48 48H144c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h384zM264 144c0 22.091-17.909 40-40 40s-40-17.909-40-40 17.909-40 40-40 40 17.909 40 40zm-72 96l39.515-39.515c4.686-4.686 12.284-4.686 16.971 0L288 240l103.515-103.515c4.686-4.686 12.284-4.686 16.971 0L480 208v80H192v-48z"></path></svg><!-- <i class="far fa-images"></i> Font Awesome fontawesome.com -->
                   </span>
-                  <span>Demo (TBU)</span>
+                  <span>Demo</span>
                 </a>
               </span>
               <!-- Video Link.
@@ -175,6 +177,13 @@
               <h5>Illustration of the proposed <b>VLM-RLAIF</b></h5>
             </div>
           </div>
+          <!-- <iframe
+          src="https://snumpr-vlm-rlaif-demo.hf.space"
+          frameborder="0"
+          width="100%"
+          height="800px"
+          ></iframe> -->
+          <gradio-app src="https://snumpr-vlm-rlaif-demo.hf.space"></gradio-app>
         </div>
       </div>
     </div>
