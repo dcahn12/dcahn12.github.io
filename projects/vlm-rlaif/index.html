@@ -215,7 +215,7 @@
             </p>
             <ol type="1">
                 <li><b>VLM-RLAIF</b>. <span style="font-size: 95%;">We propose a novel alignment method for VLMs utilizing Reinforcement Learning from AI Feedback (RLAIF) to effectively align video-text modalities. </span></li>
-                <li><b>Context-Aware Reward Modeling</b>. <span style="font-size: 95%;">We enhance AI's feedback by introducing context-aware reward modeling, focusing on improved clarity and comprehension in video content understanding, . </span></li>  
+                <li><b>Context-Aware Reward Modeling</b>. <span style="font-size: 95%;">We enhance AI's feedback by introducing context-aware reward modeling, focusing on improved clarity and comprehension in video content understanding. </span></li>  
                 <li><b>Enhanced SFT Training</b>. <span style="font-size: 95%;">We enrich the Supervised Fine-Tuning (SFT) model's training by introducing additional instruction-tune data and applying a simple curriculum strategy, which we call <span style="font-weight:bold;">VLM-SFT</span>. </span></li>
                 <li><b>Performance</b>. <span style="font-size: 95%;">We demonstrate the effectiveness of our proposed VLM-RLAIF approach on various video understanding benchmarks, showing noticeable improvements over existing methods including SFT model. </span></li>
                 <li><b>Open-source</b>. <span style="font-size: 95%;">We make AI preference data, additional visual instruction tuning data (for curriculum learning), our model and code base publicly available. </span></li>
@@ -225,7 +225,7 @@
             <div class="columns is-centered has-text-centered">
               <div class="column is-fullwidth">
                 <img src='static/figures/radar.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%">
-                <h5>Quantitative comparison of VLMMs on various video benchmarks</h5>
+                <h5>Quantitative comparison of VLMs on various video benchmarks</h5>
               </div>
             </div>
             <!-- <div class="columns is-centered has-text-centered">
@@ -278,12 +278,12 @@
         <h5 class="title is-5">3) Reinforcement learning from AI feedback</h5>
           <p>
             We finally fine-tune a supervised policy model, initialized from the VLM-SFT, aiming to optimize the scalar reward output of the trained RM by reinforcement learning (PPO). 
-            We call this trained model as the Video Large Multimodal model with RLAIF or <b>VLM-RLAIF</b> for short
+            We call this trained model as the Video Large Multimodal model with RLAIF or <b>VLM-RLAIF</b> for short.
           </p>
       </p>
       <div class="columns is-centered has-text-centered">
         <div class="column is-fullwidth">
-          <img src='static/figures/rlaif_feedback_teaser.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+          <img src='static/figures/rlaif_feedback_teaser.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
           <h5>Utilizing Reinforcement Learning from AI Feedback (RLAIF) for modality alignment between video and text </h5>
         </div>
       </div>
@@ -315,7 +315,7 @@
             <p>
               The right figure illustrates the three stages of the proposed context-aware reward modeling:
               <ol type="1">
-                <li>The SFT model produces two candidate responses from the provided video and question. </li>
+                <li>The SFT model produces two candidate responses context from the provided video. </li>
                 <li>With the video, question and responses at hand, the SFT model utilize context information and guiding prompt to evaluate the responses. </li>
                 <li>The reward model is trained using the preference pairs generated in the previous step as indicated in orange box. </li>
               </ol>
@@ -324,7 +324,7 @@
           </div>
         </div>
         <div class="column is-fullwidth">
-          <img src='static/figures/reward_modeling.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:90%">
+          <img src='static/figures/reward_modeling.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:90%">
           <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Three stages of the context-aware reward modeling</span>
         </div>
         <!-- <div class="column is-two-quarter">
