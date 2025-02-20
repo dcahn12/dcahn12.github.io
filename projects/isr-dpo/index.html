@@ -21,6 +21,7 @@
 
     gtag('config', 'G-PYVRSFMDRL');
   </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -91,7 +92,7 @@
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Paper (to appear)</span>
                 </a>
               </span>
               <span class="link-block">
@@ -172,13 +173,13 @@
               </span> -->
             </div>
           </div>
-          <!-- <br>
+          <br>
           <div class="columns is-centered has-text-centered">
             <div class="column is-fullwidth">
-              <img src='static/figures/vlm-rlaif.gif' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%" loop="infinite">
-              <h5>Illustration of the proposed <b>VLM-RLAIF</b></h5>
+              <img src='static/figures/teaser-fig.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%" loop="infinite">
+              <h5>Iterative Self-Retrospective Direct Preference Optimization, <b>ISR-DPO</b></h5>
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -232,9 +233,9 @@
 
 <section class="section">
   <div class="container is-max-widescreen">
-    <h1 class="title is-3">Under construction</h1>
-    <!-- <div class="content has-text-justified">
-      <p>
+    <h1 class="title is-3">ISR-DPO Framework</h1>
+    <div class="content has-text-justified">
+      <!-- <p>
         <h5 class="title is-5">1) Supervised fine-tuning (SFT)</h5>
           <p>
             We first fine-tune an LLM, e.g., Vicuna, using supervised learning on synthetically generated video-text instruction-tune data. 
@@ -254,14 +255,47 @@
             We finally fine-tune a supervised policy model, initialized from the VLM-SFT, aiming to optimize the scalar reward output of the trained RM by reinforcement learning (PPO). 
             We call this trained model as the Video Large Multimodal model with RLAIF or <b>VLM-RLAIF</b> for short.
           </p>
+      </p> -->
+      <p>
+          <h5 class="title is-5">Each iteration of ISR-DPO involves three stages:</h5>
+          1) After training iteration \( t \), the latest updated VLMM (\( \pi_{\theta^{t}} \)) generates two different responses \( y_1 \) and \( y_2 \) for the given video \( V \) and instruction \( x \). In addition, a visual description, i.e., visual context, is generated through self-retrospection, providing the necessary input for the next stage, as indicated by the black dotted line.
+          <br>
+          2) Using the information generated in the previous stage, the model (\( \pi_{\theta^{t}} \)) compares its responses (\( y_1 \) and \( y_2 \)) and classifies the preferred response \( y_w \) and the rejected response \( y_l \).
+          <br>
+          3) Then, the VLMM (\( \pi_{\theta^{t}} \)) is optimized using DPO to update the parameters to \( \pi_{\theta^{t+1}} \).
       </p>
+
       <div class="columns is-centered has-text-centered">
         <div class="column is-fullwidth">
-          <img src='static/figures/rlaif_feedback_teaser.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
-          <h5>Utilizing Reinforcement Learning from AI Feedback (RLAIF) for modality alignment between video and text </h5>
+          <img src='static/figures/overview-fig.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+          <h5>Overview of self-retrospective direct preference optimization for modality alignment between video and text </h5>
         </div>
       </div>
-    </div> -->
+      <p>
+        <h5 class="title is-5">Self-Retrospective Preference Modeling</h5>
+        <p>
+            A key aspect of iterative DPO is that the VLMM acts as a judge to select the most appropriate response to a given question.
+            To enhance this process, the VLMM utilizes detailed visual descriptions as visual context, which it generates itself alongside the video content for improved clarity.
+        </p>
+        <p>
+            Inspired by human learning processes, we incorporate a <em>self-retrospective</em> mechanism, where previously generated visual context is leveraged to produce better context.
+            This improves the accuracy and relevance of preference selection. The process is formulated as follows:
+        </p>
+        <p>
+            \[
+                c_{t} \sim \pi_{\theta^{t}}(V, c_{t-1})
+            \]
+        </p>
+        <p>
+            where \( c_{t-1} \) represents the visual context at time \( t-1 \).
+        </p>
+        <p>
+            Using the generated context \( c_t \), question \( x \), video \( V \), and responses \( \{y_1, y_2\} \), the aligned VLMM \( \pi_{\theta^{t}} \) classifies the preferred response \( y_w \) and the rejected response \( y_l \).
+            This process, termed <em>self-retrospective preference modeling</em>, enables the construction of preference data \( D_t^{\text{pref}} \) at time \( t \).
+        </p>
+      </p>
+
+    </div>
 
   </div>
 
@@ -299,27 +333,25 @@
 </section>
 
 
-<!-- <section class="hero is-light">
+<section class="hero is-light">
   <div class="hero-body">
     <div class="container is-max-widescreen">
       <h2 class="title is-3">Results</h2>
-      For more experimental results, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2402.03746" target="_new">paper</a></span>.
+      For more experimental results, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2406.11280" target="_new">paper</a></span>.
       <div class="content has-text-justified">
         <br>
-        <h5 class="title is-5">1) Quantitative comparison with prior arts</h5>
+        <h5 class="title is-5">Quantitative comparison on in/out-domain VideoQA with prior arts</h5>
           <p>
-            We quantitatively evaluate VLMMs on the video-based generative performance benchmark that measures five criteria of generated text, showing effectiveness of our proposed VLM-RLAIF. 
+            We quantitatively evaluate VLMMs on the in/out-domain VideoQA benchmark, showing effectiveness of our proposed ISR-DPO. 
           </p>
 
           <div class="columns is-centered has-text-centered">
             <div class="column is-full-width">
-              <img src="static/tables/rlaif_result.jpg" width="1200">
-              <h5>Quantitative comparison between different VLMMs on video-based generative performance benchmark</h5>
+              <img src="static/tables/results-inout.png" width="1200">
+              <h5>Quantitative comparison between different VLMMs on in-domain (left) and out-domain (right) VideoQA benchmark</h5>
             </div>
           </div>
-
-
-        <h5 class="title is-5">2) Qualitative comparison between VLM-SFT and VLM-RLAIF</h5> 
+        <!-- <h5 class="title is-5">2) Qualitative comparison between VLM-SFT and VLM-RLAIF</h5> 
           <p>
             We qualitatively compares the performance of VLM-SFT and VLM-RLAIF, highlighting their multimodal understanding capabilities below Figure. 
             VLM-RLAIF consistently yields more accurate answers than VLM-SFT, as highlighted in <span style="color: blue;">blue</span> for accurate responses and <span style="color: red;">red</span> for less accurate ones.
@@ -329,13 +361,11 @@
             <img src="static/figures/sft_rlaif.png" width="1000">
             <h5>Qualitative examples of the comparative results between VLM-SFT and VLM-RLAIF in video instruction-following task</h5>
           </div>
-        </div>
-
-
+        </div> -->
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
 
 <section class="section" id="BibTeX">
