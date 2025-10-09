@@ -134,7 +134,7 @@
             <div class="column is-full-width">
               <h2 class="title is-3">Game Play between Ours and Built-in AI (Elite)</h2>
               <div class="publication-video">
-                <iframe src="https://www.youtube.com/embed/5ySW_l3P6aE"
+                <iframe src="https://www.youtube.com/embed/AEqLN2pz9ns"
                         frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
               </div>
             </div>
@@ -193,8 +193,8 @@
       </div> -->
       <div class="columns is-centered has-text-centered">
             <div class="column is-fullwidth">
-              <img src='static/figures/hima_overview.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%" loop="infinite">
-              <h5>Illustration of the proposed <b>HIMA</b></h5>
+              <img src='static/figures/HIMA.gif' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%" loop="infinite">
+              <h5>Illustration of the proposed <b>H</b>ierarchical <b>I</b>mitation <b>M</b>ulti-<b>A</b>gent (<b>HIMA</b>)</h5>
             </div>
       </div>
     </div>
@@ -246,12 +246,16 @@
         <div class="column is-two-quarter">
           <div class="content has-text-justified">
             <p>
-              Underconstruction
+              We use human demonstration data from professional StarCraft II replays to train each specialized agent on distinct strategic patterns through supervised fine-tuning. 
+              Each agent generates structured action sequences spanning multiple timesteps (approximately 3 minutes), accompanied by tactical rationales that explain why these actions suit the current game state. 
+              By clustering the demonstration data based on unit compositions, we create agents specialized in different strategies—such as air superiority, ground forces, or balanced approaches. 
+              The Strategic Planner meta-controller then orchestrates these diverse agent proposals into a unified, adaptive plan that responds to real-time battlefield conditions. 
+              This hierarchical approach significantly reduces decision-making frequency while maintaining strategic coherence and adaptability in complex RTS environments.
             </p>
           </div>
         </div>
         <div class="column is-fullwidth">
-          <img src='static/figures/hima_data_gen.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:90%">
+          <img src='static/figures/hima_data_gen.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%">
           <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Dataset for structured action sequence</span>
         </div>
       </div>
@@ -280,12 +284,16 @@
         <div class="column is-two-quarter">
           <div class="content has-text-justified">
             <p>
-              Underconstruction
+              The Strategic Planner orchestrates action proposals from multiple specialized agents by considering real-time environmental contexts including opponent state and previous action outcomes. 
+              We employ a four-stage process: assessing current game state, resolving conflicting strategies from different agents using Nominal Group Technique, formulating a unified strategy, and planning actions through temporal Chain-of-Thought (t-CoT). 
+              The t-CoT mechanism breaks down decisions into immediate actions (addressing failed commands), short-term responses (countering upcoming threats), and long-term strategic goals (maintaining technological advancement). 
+              Environmental feedback, such as enemy attacks or failed prerequisites, triggers immediate re-evaluation and adaptation of the current plan. 
+              This orchestration ensures that agent proposals are dynamically adjusted to battlefield conditions while maintaining strategic coherence across different time horizons.
             </p>
           </div>
         </div>
         <div class="column is-fullwidth">
-          <img src='static/figures/hima_orchestration.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:90%">
+          <img src='static/figures/hima_orchestration.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%">
           <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Environment-aware action orchestration</span>
         </div>
       </div>
@@ -334,11 +342,12 @@
     <div class="container is-max-widescreen">
       <h2 class="title is-3">Results</h2>
       For more experimental results, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://openreview.net/pdf?id=VYdbeSoXWD" target="_new">paper</a></span>.
+      <!-- We propose <b>TextSCII-ALL</b> benchmark environment, extending TextStarCraft to all three races. -->
       <div class="content has-text-justified">
         <br>
-        <h5 class="title is-5">1) Quantitative comparison with prior arts in matchups with built-in AI</h5>
+        <h5 class="title is-5">Quantitative comparison with prior arts in matchups with built-in AI</h5>
           <p>
-            We quantitatively ...
+            <!-- We quantitatively ... -->
             <!-- In specific, five criteria assess the relevance of the model’s output to the video content, its capacity to capture essential details and contextual information, its understanding of temporal sequences, and the consistency in responding to varied yet related queries.  -->
           </p>
 
@@ -350,16 +359,16 @@
           </div>
 
 
-        <h5 class="title is-5">2) Qualitati...</h5> 
-          <p>
+        <!-- <h5 class="title is-5">2) Qualitati...</h5>  -->
+          <!-- <p>
             We qualitatively ...
-          </p>
-        <!-- <div class="columns is-centered has-text-centered">
+          </p> -->
+        <div class="columns is-centered has-text-centered">
           <div class="column is-full-width">
-            <img src="static/figures/sft_rlaif.png" width="1000">
-            <h5>Qualitative examples of the comparative results between VLM-SFT and VLM-RLAIF in video instruction-following task</h5>
+            <img src="static/figures/quanti_hima_others.png" width="600">
+            <h5>Match-ups between HIMA (Ours) and SoTAs.</h5>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
