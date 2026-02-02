@@ -154,8 +154,8 @@ ul, ol {
 
 .profile-photo {
   float: right;
-  width: 180px;
-  margin: 0 0 15px 20px;
+  width: 158px;
+  margin: -55px 0 5px 10px;
   border-radius: 5px;
 }
 
@@ -269,6 +269,14 @@ ul, ol {
 
   name {
     font-size: 26px;
+  }
+
+  /* Profile photo - mobile */
+  .profile-photo {
+    float: none;
+    display: block;
+    width: 160px;
+    margin: 0 auto 15px auto;
   }
 
 }
