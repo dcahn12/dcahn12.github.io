@@ -92,6 +92,15 @@ strong {
 heading {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 22px;
+  display: inline-block;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1772d0;
+}
+
+/* Section spacing */
+.section-heading {
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 
 papertitle {
@@ -134,4 +143,170 @@ ul, ol {
   line-height: 1.8;
   margin: 0;
   padding-inline-start: 3em;
+}
+
+/* Profile Section Styles */
+#profile-section {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.profile-photo {
+  float: right;
+  width: 180px;
+  margin: 0 0 15px 20px;
+  border-radius: 5px;
+}
+
+/* News Section Styles */
+.news-date {
+  color: #1772d0;
+  font-weight: 700;
+}
+
+.news-scroll {
+  max-height: 150px;
+  overflow-y: auto;
+  cursor: grab;
+  padding-right: 5px;
+}
+
+.news-scroll:active {
+  cursor: grabbing;
+}
+
+.news-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.news-scroll::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 2px;
+}
+
+.news-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+.news-scroll::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Equal contribution note */
+.equal-contrib {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin: 4px 0 0 24px;
+}
+
+/* TL;DR Style */
+.tldr {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #555;
+  font-style: italic;
+  line-height: 1.5;
+  background-color: #f8f8f8;
+  border-left: 3px solid #ddd;
+  border-radius: 0 4px 4px 0;
+}
+
+.tldr-label {
+  font-weight: 700;
+  color: #888;
+  font-style: normal;
+}
+
+/* Publication layout - desktop */
+.teaser {
+  width: 100%;
+  max-width: 100%;
+  border-style: none;
+}
+
+/* Preprint teaser - cropped vertically */
+#preprints .teaser {
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
+}
+
+#publications tr {
+  border-bottom: 1px solid #eee;
+}
+
+#publications tr:last-child {
+  border-bottom: none;
+}
+
+@media screen and (min-width: 769px) {
+  #publications td {
+    display: table-cell !important;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  /* Improve text readability */
+  body, td, th, tr, p, a, strong {
+    font-size: 15px;
+  }
+
+  papertitle {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  heading {
+    font-size: 20px;
+  }
+
+  name {
+    font-size: 26px;
+  }
+
+}
+
+/* Publication entries - mobile spacing */
+@media screen and (max-width: 768px) {
+  #publications tr {
+    display: block;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  #publications tr:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  #publications td {
+    display: block;
+    width: 100% !important;
+    padding: 15px 5px !important;
+  }
+
+  #publications td img.teaser {
+    display: block;
+    margin: 0 auto 5px auto;
+    height: auto;
+  }
+
+  /* Individual mobile sizes - adjust width values as needed */
+  .teaser-1 { width: 370px; }  /* BINDER */
+  .teaser-2 { width: 500px; }  /* LWE */
+  .teaser-3 { width: 350px; }  /* VECToR */
+  .teaser-4 { width: 370px; }  /* HIMA */
+  .teaser-5 { width: 350px; }  /* MA-VR */
+  .teaser-6 { width: 320px; }  /* ISR-DPO */
+  .teaser-7 { width: 320px; }  /* VLM-RLAIF */
+  .teaser-8 { width: 350px; }  /* CMOTA */
+  .teaser-9 { width: 350px; }  /* PSVL */
 }
