@@ -402,10 +402,19 @@ to multi-agent reasoning and real-world robotic manipulation.
         </tbody></table>
 
         <!-- Past Research Section -->
-        <p style="margin-top:30px;margin-bottom:10px;font-size:15px;color:#555;"><strong>Past Research: Semiconductor</strong></p>
+        <p style="margin-top:30px;margin-bottom:10px;font-size:15px;color:#555;">
+          <strong>Past Research: Semiconductor</strong>
+          <span id="semi-toggle" onclick="toggleSemiconductor()" style="cursor:pointer;color:#1772d0;font-size:13px;margin-left:10px;">[Show details]</span>
+        </p>
         <p style="margin-top:0px;margin-bottom:15px;color:#888;font-size:13px;font-style:italic;">Research conducted at KAIST during M.S. (2015–2017).</p>
 
-        <div style="margin-top:15px;">
+        <!-- Summary view (default) -->
+        <div id="semi-summary" style="font-size:13px;color:#555;margin-top:10px;">
+          First-Author Journal Papers: 3 &nbsp;|&nbsp; Co-Author Journal Papers: 9 &nbsp;|&nbsp; Conference Papers: 5
+        </div>
+
+        <!-- Detailed view (hidden by default) -->
+        <div id="semi-details" style="margin-top:15px;display:none;">
           <p style="margin-bottom:8px;"><strong>First-Author Journal Papers</strong></p>
           <ul style="font-size:13px;color:#444;line-height:1.6;margin-bottom:15px;">
             <li><strong>D. Ahn</strong>, B.-H. Lee, M.-H. Kang, J. Hur, T. Bang, Y.-K. Choi, "Impact of Crystalline Damage on a Vertically Integrated Junctionless Nanowire Transistor," <em>Appl. Phys. Lett.</em>, 2016.</li>
@@ -431,11 +440,28 @@ to multi-agent reasoning and real-world robotic manipulation.
             <li>D. Kim, <strong>D. Ahn</strong>, M. G. Allen, Y.-K. Choi, "Triboelectrification Driven Fin-FACT...," <em>IEEE MEMS</em>, 2017.</li>
             <li>D. Lee, ..., <strong>D. Ahn</strong>, et al., "First Demonstration of a Wrap-Gated CNT-FET...," <em>IEEE IEDM</em>, 2016.</li>
             <li>B.-H. Lee, <strong>D. Ahn</strong>, M.-H. Kang, S.-B. Jeon, Y.-K. Choi, "Vertically Integrated ZRAM...," <em>230th ECS Meeting</em>, 2016.</li>
-            <!-- <li>T. Bang, ..., <strong>D. Ahn</strong>, et al., "Improved Split C-V Technique...," <em>23rd Korean Conf. on Semiconductors</em>, 2016.</li> -->
             <li>B.-H. Lee, <strong>D. Ahn</strong>, et al., "Vertically Integrated Multiple Nanowire FET," <em>228th ECS Meeting</em>, 2015.</li>
             <li>B.-H. Lee, M.-H. Kang, J. Hur, <strong>D. Ahn</strong>, et al., "An Optimum Strategy for the Low Voltage Operation of the Mechanical Switch," <em>IEEE NANO</em>, 2015. <strong>(Best Poster Paper Award)</strong></li>
           </ul>
         </div>
+
+        <script>
+        function toggleSemiconductor() {
+          var summary = document.getElementById('semi-summary');
+          var details = document.getElementById('semi-details');
+          var toggle = document.getElementById('semi-toggle');
+
+          if (details.style.display === 'none') {
+            details.style.display = 'block';
+            summary.style.display = 'none';
+            toggle.textContent = '[Hide details]';
+          } else {
+            details.style.display = 'none';
+            summary.style.display = 'block';
+            toggle.textContent = '[Show details]';
+          }
+        }
+        </script>
 
         <!-- Awards Section -->
         <table class="section-heading" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
