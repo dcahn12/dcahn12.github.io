@@ -41,6 +41,38 @@
   <script src="./static/js/index.js"></script>
   <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.12.0/gradio.js"></script>
   <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.35.2/gradio.js"></script>
+  <style>
+    /* Available button styles */
+    .available-btn {
+      transition: all 0.2s ease;
+    }
+    .available-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .available-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Coming soon button styles */
+    .coming-soon-btn {
+      cursor: not-allowed !important;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+      pointer-events: auto !important;
+    }
+    .coming-soon-btn:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+    .coming-soon-btn:active {
+      transform: scale(0.98);
+    }
+
+    .link-block {
+      position: relative;
+    }
+  </style>
 </head>
 <body>
 
@@ -57,19 +89,22 @@
           </h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://dcahn12.github.io" target="_new">Daechul Ahn*</a>,
+              <a href="https://dcahn12.github.io" target="_new">Daechul Ahn*</a>,&nbsp;
             </span>
             <span class="author-block">
-              <a href="https://yuuraa.github.io/" target="_new"> Yura Choi* </a>,
+              <a href="https://yuuraa.github.io/" target="_new"> Yura Choi* </a>,&nbsp;
             </span>
             <span class="author-block">
               <a href="https://hyeonbeomchoi.github.io"> Hyeonbeom Choi* </a>,
             </span>
+
+            <br>
+
             <span class="author-block">
               <a href="https://seongwon980.github.io/" target="_new"> Seongwon Cho </a>,
             </span>
             <span class="author-block">
-              <a href="https://mounkim.github.io" target="_new">San Kim*</a>,
+              <a href="https://mounkim.github.io" target="_new">San Kim</a>,
             </span>
             <span class="author-block">
               <a href="https://ppolon.github.io" target="_new">Jonghyun Choi</a>
@@ -85,32 +120,54 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper (Comingsoon)</span>
-                </a>
-              </span>
+              <!-- arXiv Link (available) -->
               <span class="link-block">
                 <a href="https://arxiv.org/pdf/2512.08979" target="_new"
-                   class="external-link button is-normal is-rounded is-dark">
+                   class="external-link button is-normal is-rounded is-dark available-btn">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
                   <span>arXiv</span>
                 </a>
               </span>
+
+              <br>
+
+              <!-- Coming Soon Links -->
               <span class="link-block">
-                <a href="https://github.com/snumprlab/" target="_new"
-                   class="external-link button is-normal is-rounded is-dark">
+                <a class="external-link button is-normal is-rounded is-light coming-soon-btn"
+                   onclick="alert('Paper will be available soon!')" title="Coming soon">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Coming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-light coming-soon-btn"
+                   onclick="alert('Code will be available soon!')" title="Coming soon">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (Comingsoon)</span>
+                  <span>Code (Coming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-light coming-soon-btn"
+                   onclick="alert('Dataset will be available soon!')" title="Coming soon">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>Dataset (Coming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-light coming-soon-btn"
+                   onclick="alert('Model will be available soon!')" title="Coming soon">
+                  <span class="icon">
+                    <i class="fas fa-share-square"></i>
+                  </span>
+                  <span>Model (Coming soon)</span>
                 </a>
               </span>
 
@@ -166,44 +223,24 @@
     <div class="container is-max-desktop">
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
+        <div class="column is-10">
           <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <!-- <p>
-                Recent advancements in large language models have influenced the development of video large multimodal models (VLMMs). 
-                Previous approaches for VLMMs involve Supervised Fine-Tuning (SFT) with instruction-tuned datasets, integrating LLM with visual encoders, and additional learnable parameters. 
-                Here, aligning video with text, and vice versa, remains a challenge, primarily due to the insufficient quality and quantity of multimodal instruction-tune data compared to that of text-only. 
-                This discrepancy often results in alignments that poorly ground the video content. 
-                To address this, we present a novel alignment strategy that employs a multimodal AI system equipped with Reinforcement Learning from AI Feedback (RLAIF), providing self-preference feedback to refine itself and facilitating the alignment of video and text modalities. 
-                Our approach uniquely integrates detailed video descriptions as context into a multimodal AI system during preference feedback generation to enrich the understanding of video content, a process we call context-aware reward modeling. 
-                Empirical evaluations on various video benchmarks demonstrate that our proposed method outperforms existing approaches, including the SFT model.
-            </p> -->
-            Video Large Multimodal Models (VLMMs) have shown impressive performance in video understanding, yet their ability to accurately capture the temporal order of multiple events remains underexplored. We interestingly observe that, even when video frames are scrambled, models perform very well on the existing benchmarks by comprehensive experiments. This implies that VLMMs may not necessarily rely on accurate sequential processing of visual events, but instead depend on prior knowledge of typical scenarios to answer the question. To benchmark temporal understanding capabilities in VLMMs, we propose VECTOR, designed to explicitly assess a model's ability to identify the temporal order of events. On this benchmark, we observe that various VLMMs often fail to understand the orders of events. To address this, we propose MECOT (Multi-Event instruction fine-tuning with Chain-of-Thought), which (1) trains models on detailed, event-by-event video descriptions and (2) using chain-of-thought prompts at inference to enhance temporal awareness. MECOT outperforms prior arts on VECTOR as well as improving performance on existing video benchmarks, implying effectiveness of temporal understanding.
-            <p></p>
-            <!-- <div class="columns is-centered has-text-centered">
-              <div class="column is-fullwidth">
-                <img src='static/figures/radar.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%">
-                <h5>Quantitative comparison of VLMs on various video benchmarks</h5>
-              </div>
-            </div> -->
+          <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 8px 8px 0; padding: 25px 30px;">
+            <div class="content has-text-justified" style="font-size: 1.05em; line-height: 1.7; margin: 0;">
+              We find that Video Large Multimodal Models (VLMMs) often rely on <strong>prior knowledge</strong> rather than actual visual sequences to predict event orders. To rigorously evaluate temporal understanding, we introduce <span style="background: #5a7a94; color: white; padding: 2px 8px; border-radius: 3px; font-weight: 600;">VECTOR</span>, a benchmark designed to assess models' ability to identify the temporal order of events. We also propose <span style="background: #5a7a94; color: white; padding: 2px 8px; border-radius: 3px; font-weight: 600;">MECoT</span>, which combines multi-event instruction fine-tuning with chain-of-thought prompting to enhance temporal reasoning. MECoT achieves state-of-the-art results on VECTOR while also improving performance on general video benchmarks.
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- [HERE] gif figure insert!!! -->
+
       <!-- <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-3">Video</h2>
-          <div class="publication-video">
-            <iframe src="https://www.youtube.com/embed/4vIrqhuU5XE?si=zG8nzhUl78FZEY-Q"
-                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div> -->
-      <div class="columns is-centered has-text-centered">
             <div class="column is-fullwidth">
               <img src='static/figures/HIMA.gif' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%" loop="infinite">
-              <h5>Illustration of the proposed <b>H</b>ierarchical <b>I</b>mitation <b>M</b>ulti-<b>A</b>gent (<b>HIMA</b>)</h5>
+              <h5>Motivation of the proposed <b>V</b>isual <b>E</b>vent <b>C</b>hronology and <b>T</b>emporal <b>O</b>rder <b>R</b>easoning (<b>VECTOR</b>) Benchamark</h5>
             </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -212,35 +249,134 @@
 
 <section class="section">
   <div class="container is-max-widescreen">
-    <h1 class="title is-3">Limitations in existing LLM-based approaches</h1>
+    <!-- MOTIVATION Section -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">MOTIVATION</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        Diagnosing the Prior-Knowledge Bias
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">Why do current Video LMMs fail at temporal reasoning?</p>
+    </div>
     <div class="content has-text-justified">
-      <p>
-        Insufficient domain knowledge and frequent short-term action generation lead to <b>inefficient</b> and <b>ineffective</b> long-term planning during game play.
-      </p>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-fullwidth">
-          <img src='static/figures/hima_motivation.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:70%;max-width:70%">
-          <p></p>
-          <h5>Overview of the proposed hierarchical imitation multi-agent (HIMA) framework </h5>
+
+      <!-- Key Question Box -->
+      <div style="background: #5a7a94; color: white; padding: 18px 25px; border-radius: 6px; margin-bottom: 25px;">
+        <p style="font-size: 1.15em; margin: 0; font-weight: 500;">
+          Do VLMMs truly understand temporal order, or just rely on common sense?
+        </p>
+      </div>
+
+      <!-- Phenomenon Explanation with Figure -->
+      <div class="columns is-vcentered" style="margin-bottom: 30px;">
+        <div class="column is-5">
+          <img src='static/figures/vector_biased_pred.png' style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 10px; font-style: italic;">Biased prediction on event-ordering task</p>
+        </div>
+        <div class="column is-7">
+          <div style="background: #f8f9fa; padding: 20px; border-left: 3px solid #5a7a94; border-radius: 0 6px 6px 0;">
+            <p style="margin-bottom: 15px;">
+              <strong>Example:</strong> Consider a campfire-making video with three steps:
+            </p>
+            <div style="display: flex; justify-content: space-around; margin: 15px 0; font-size: 0.95em;">
+              <span style="background: #e9ecef; padding: 8px 15px; border-radius: 4px;"><b>(A)</b> Arranging stones</span>
+              <span style="background: #e9ecef; padding: 8px 15px; border-radius: 4px;"><b>(B)</b> Lighting a fire</span>
+              <span style="background: #e9ecef; padding: 8px 15px; border-radius: 4px;"><b>(C)</b> Observing ashes</span>
+            </div>
+            <p>
+              GPT-4o correctly predicts the order <b>A→B→C</b>. But when we swap the events so the video actually shows <b style="color: #e57373;">C→B→A</b>, the model <em>still</em> predicts A→B→C — it follows what <em>typically happens</em> rather than what is <em>actually shown</em> in the video.
+            </p>
+          </div>
         </div>
       </div>
+
+      <!-- Results Highlight -->
+      <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 6px 6px 0; padding: 18px 20px; margin-bottom: 25px;">
+        <p style="margin: 0;">
+          <strong>How often does this happen?</strong> We measure this with the <b>biased ratio (η)</b>, which captures how frequently models produce the same prediction regardless of the actual visual order.
+        </p>
+      </div>
+
+      <!-- Results Table -->
+      <div class="has-text-centered">
+        <img src='static/figures/vector_event_sequencing.png' style="max-width: 60%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 10px; font-style: italic;">Event sequencing task on videos with original and shuffled event order</p>
+      </div>
+
+      <!-- Key Finding -->
+      <div style="background: #e57373; color: white; padding: 18px 25px; border-radius: 6px; margin-top: 25px;">
+        <p style="font-size: 1.05em; margin: 0;">
+          <strong>Key Finding:</strong> η exceeds <b>78%</b> across all models and datasets, indicating that current VLMMs heavily depend on prior knowledge as a shortcut, bypassing genuine temporal reasoning. <em>This finding motivates our work.</em>
+        </p>
+      </div>
+
     </div>
   </div>
 
   <br>
 
   <div class="container is-max-widescreen">
-    <h1 class="title is-3">Hierarchical Imitation Multi-Agent (HIMA) Framework</h1>
+    <!-- BENCHMARK Section Header -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">BENCHMARK</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        VECTOR: Comprehending Temporal Order of Events in Videos
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">Five tasks across two evaluation groups to diagnose temporal understanding</p>
+    </div>
+
     <div class="content has-text-justified">
-      <p>
-        <b>tl;dr.</b> Multiple fine-tuned imitation agents (1.5B models) trained on our collected human demonstrations generate long action proposals, which a strategic planner (e.g., GPT) orchestrates into adaptive strategies.
-      </p>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-fullwidth">
-          <img src='static/figures/hima_overview.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:80%;max-width:80%">
-          <p></p>
-          <h5>Overview of the proposed hierarchical imitation multi-agent (HIMA) framework </h5>
+      <!-- Overview Statement -->
+      <div style="background: #5a7a94; color: white; padding: 18px 25px; border-radius: 6px; margin-bottom: 25px;">
+        <p style="font-size: 1.05em; margin: 0;">
+          VECTOR evaluates whether VLMMs can truly understand <em>when</em> things happen in a video.
+        </p>
+      </div>
+
+      <!-- Overview Figure -->
+      <div class="has-text-centered" style="margin-bottom: 30px;">
+        <img src='static/figures/vector_overview.png' style="max-width: 95%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 10px; font-style: italic;">Overview of the VECTOR benchmark</p>
+      </div>
+
+      <!-- Two Column Task Descriptions -->
+      <div class="columns" style="margin-top: 20px;">
+        <!-- Event-level Tasks -->
+        <div class="column is-half">
+          <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 6px 6px 0; padding: 20px; height: 100%;">
+            <h4 style="color: #5a7a94; margin-bottom: 15px; font-weight: 600;">
+              Event-level Tasks
+            </h4>
+            <p style="margin-bottom: 12px;">Test whether models can correctly track <strong>individual events</strong> over time.</p>
+            <p style="font-size: 0.95em; color: #555;">Given a video of multiple unrelated actions, models must:</p>
+            <ul style="font-size: 0.9em; color: #555; margin-top: 8px;">
+              <li>List all events in chronological order</li>
+              <li>Identify which events occur between two specified events</li>
+              <li>Pinpoint the exact position of queried events</li>
+            </ul>
+          </div>
         </div>
+        <!-- Pattern-level Tasks -->
+        <div class="column is-half">
+          <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 6px 6px 0; padding: 20px; height: 100%;">
+            <h4 style="color: #5a7a94; margin-bottom: 15px; font-weight: 600;">
+              Pattern-level Tasks
+            </h4>
+            <p style="margin-bottom: 12px;">Models must recognize <strong>higher-level temporal structures</strong>.</p>
+            <p style="font-size: 0.95em; color: #555;">Given a sequence with semantic patterns, models must:</p>
+            <ul style="font-size: 0.9em; color: #555; margin-top: 8px;">
+              <li>Detect where an anomalous event breaks the pattern</li>
+              <li>Understand how actions relate across time</li>
+              <li>Go beyond recognizing individual actions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div style="background: #e9ecef; border-radius: 6px; padding: 15px 20px; margin-top: 25px; text-align: center;">
+        <p style="margin: 0; color: #555;">
+          By combining both <strong>event-level</strong> and <strong>pattern-level</strong> reasoning, VECTOR provides a <strong>comprehensive diagnosis</strong> of temporal understanding in VLMMs.
+        </p>
       </div>
     </div>
   </div>
@@ -248,133 +384,102 @@
   <br><br>
 
   <div class="container is-max-widescreen">
-    <h3 class="title is-4">Imitation-learning agent using human demonstration</h3>
-      <div class="columns is-centered">
-        <div class="column is-two-quarter">
-          <div class="content has-text-justified">
-            <p>
-              We use human demonstration data from professional StarCraft II replays to train each specialized agent on distinct strategic patterns through supervised fine-tuning. 
-              Each agent generates structured action sequences spanning multiple timesteps (approximately 3 minutes), accompanied by tactical rationales that explain why these actions suit the current game state. 
-              By clustering the demonstration data based on unit compositions, we create agents specialized in different strategies—such as air superiority, ground forces, or balanced approaches. 
-              The Strategic Planner meta-controller then orchestrates these diverse agent proposals into a unified, adaptive plan that responds to real-time battlefield conditions. 
-              This hierarchical approach significantly reduces decision-making frequency while maintaining strategic coherence and adaptability in complex RTS environments.
-            </p>
-          </div>
-        </div>
-        <div class="column is-fullwidth">
-          <img src='static/figures/hima_data_gen.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%">
-          <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Dataset for structured action sequence</span>
-        </div>
-      </div>
-      <!-- <h3 class="title is-4">Online Text-Augmentation</h3>
-      <div class="columns is-centered">
-        <div class="column is-two-quarters">
-          <div class="content has-text-justified">
-            <p>
-              Thanks to our bi-directional Transformers architecture, we can naturally integrate the process of generating pseudo-texts to the process of learning image-to-text model and the text-to-image generation model. 
-              In the early epochs, less meaningful sentences are generated, but as training progresses, more meaningful sentences are generated. 
-              As a side-product, by supervising the model learning with intermediate goals at each time step, we expect to expedite the convergence of learning.
-            </p>
-          </div>
-        </div>
-        <div class="column is-two-quarter">
-          <img src='static/figures/ota_simple.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
-        </div>
-      </div> -->
-  </div>
-
-  <br>
-
-  <div class="container is-max-widescreen">
-    <h3 class="title is-4">Environment-aware action orchestration</h3>
-      <div class="columns is-centered">
-        <div class="column is-two-quarter">
-          <div class="content has-text-justified">
-            <p>
-              The Strategic Planner orchestrates action proposals from multiple specialized agents by considering real-time environmental contexts including opponent state and previous action outcomes. 
-              We employ a four-stage process: assessing current game state, resolving conflicting strategies from different agents using Nominal Group Technique, formulating a unified strategy, and planning actions through temporal Chain-of-Thought (t-CoT). 
-              The t-CoT mechanism breaks down decisions into immediate actions (addressing failed commands), short-term responses (countering upcoming threats), and long-term strategic goals (maintaining technological advancement). 
-              Environmental feedback, such as enemy attacks or failed prerequisites, triggers immediate re-evaluation and adaptation of the current plan. 
-              This orchestration ensures that agent proposals are dynamically adjusted to battlefield conditions while maintaining strategic coherence across different time horizons.
-            </p>
-          </div>
-        </div>
-        <div class="column is-fullwidth">
-          <img src='static/figures/hima_orchestration.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:80%">
-          <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Environment-aware action orchestration</span>
-        </div>
-      </div>
-      <!-- <h3 class="title is-4">Online Text-Augmentation</h3>
-      <div class="columns is-centered">
-        <div class="column is-two-quarters">
-          <div class="content has-text-justified">
-            <p>
-              Thanks to our bi-directional Transformers architecture, we can naturally integrate the process of generating pseudo-texts to the process of learning image-to-text model and the text-to-image generation model. 
-              In the early epochs, less meaningful sentences are generated, but as training progresses, more meaningful sentences are generated. 
-              As a side-product, by supervising the model learning with intermediate goals at each time step, we expect to expedite the convergence of learning.
-            </p>
-          </div>
-        </div>
-        <div class="column is-two-quarter">
-          <img src='static/figures/ota_simple.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
-        </div>
-      </div> -->
-  </div>
-  <!-- <br>
-
-  <div class="container is-max-widescreen">
-    <h1 class="title is-3">Improving multimodal capability of SFT model</h1>
-    <div class="content has-text-justified">
-      <p>
-        To improve multimodal instruction-following capability of SFT model, we augments the Supervised Fine-Tuning (SFT) model's learning process with additional instruction-tuning datasets and a straightforward curriculum-based strategy.
-        <h5 class="title is-5">1) Additional multimodal instruction-tuning dataset</h5>
-          <p>
-            We first
-          </p>
-        <h5 class="title is-5">2) Reward modeling with AI feedback</h5>
-          <p>
-            A key aspect of the RLAIF involves leveraging a pre-trained AI model to generate human-like preferences between different responses generated from the same input.
-            To obtain human-like preference, we employ the VLM-SFT as a judge to assess preferences. 
-            Once preferences are judged, we train a reward model (RM) based on preferences using a cross-entropy loss, following the Bradley-Terry model for estimating score functions from pairwise preferences.
-            The RM give higher score reward to the better response and lower score reward to the less appropriate one in a pair of responses, thus guiding the policy model using reinforcement learning.
-          </p>
-      </p>
+    <!-- METHOD Section Header -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">METHOD</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        <b>M</b>ulti-<b>E</b>vent instruction fine-tuning with <b>C</b>hain-<b>o</b>f-<b>T</b>hought (<b>MECoT</b>)
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">A two-stage approach to improve temporal reasoning in VLMMs</p>
     </div>
-  </div> -->
+
+    <div class="content">
+      <!-- Stage 1: Multi-event instruction fine-tuning -->
+      <div style="background: #f8f9fa; border-radius: 8px; padding: 25px; margin-bottom: 25px;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+          <span style="background: #5a7a94; color: white; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.85em; margin-right: 15px;">STAGE 1</span>
+          <h3 style="margin: 0; color: #5a7a94;">Multi-Event Instruction Fine-Tuning</h3>
+        </div>
+
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <div style="background: white; padding: 15px; border-radius: 6px; border-left: 3px solid #5a7a94;">
+              <p style="margin-bottom: 12px;"><strong>Problem:</strong> Existing video descriptions oversimplify multi-event videos into a single summary, losing fine-grained temporal details.</p>
+              <p style="margin-bottom: 12px;"><strong>Solution:</strong></p>
+              <ul style="font-size: 0.95em; color: #555; margin: 0;">
+                <li>Generate segment-wise descriptions using pre-trained VLMM</li>
+                <li>Merge into coherent temporal narrative via GPT-4o-mini</li>
+                <li>Fine-tune with <strong>120K</strong> multi-event descriptions</li>
+              </ul>
+            </div>
+          </div>
+          <div class="column is-7">
+            <img src='static/figures/vector_mecot_1.png' style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 10px; font-style: italic;">Overview of multi-event instruction fine-tuning</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2: Temporal Chain-of-Thought -->
+      <div style="background: #f8f9fa; border-radius: 8px; padding: 25px;">
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+          <span style="background: #5a7a94; color: white; padding: 6px 14px; border-radius: 4px; font-weight: 600; font-size: 0.85em; margin-right: 15px;">STAGE 2</span>
+          <h3 style="margin: 0; color: #5a7a94;">Temporal Chain-of-Thought</h3>
+        </div>
+
+        <div class="columns is-vcentered">
+          <div class="column is-5">
+            <div style="background: white; padding: 15px; border-radius: 6px; border-left: 3px solid #5a7a94;">
+              <p style="margin-bottom: 12px;"><strong>At inference time:</strong></p>
+              <ol style="font-size: 0.95em; color: #555; margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Model first generates a <strong>detailed chronological description</strong> of the video</li>
+                <li style="margin-bottom: 8px;">Description serves as <strong>explicit reasoning context</strong></li>
+                <li>Model uses it alongside original video to <strong>answer the query</strong></li>
+              </ol>
+              <p style="margin-top: 12px; font-size: 0.9em; color: #555; font-style: italic;">
+                "Articulate what happens and when before reasoning about the answer"
+              </p>
+            </div>
+          </div>
+          <div class="column is-7">
+            <img src='static/figures/vector_mecot_2.png' style="width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 10px; font-style: italic;">Overview of temporal Chain-of-Thought</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 
-<section class="hero is-light">
-  <div class="hero-body">
-    <div class="container is-max-widescreen">
-      <h2 class="title is-3">Results</h2>
-      For more experimental results, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://openreview.net/pdf?id=VYdbeSoXWD" target="_new">paper</a></span>.
-      <!-- We propose <b>TextSCII-ALL</b> benchmark environment, extending TextStarCraft to all three races. -->
-      <div class="content has-text-justified">
-        <br>
-        <h5 class="title is-5">Quantitative comparison with prior arts in matchups with built-in AI</h5>
-          <p>
-            <!-- We quantitatively ... -->
-            <!-- In specific, five criteria assess the relevance of the model’s output to the video content, its capacity to capture essential details and contextual information, its understanding of temporal sequences, and the consistency in responding to varied yet related queries.  -->
-          </p>
+<section class="section">
+  <div class="container is-max-widescreen">
+    <!-- RESULTS Section Header -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">RESULTS</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        Experimental Results
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">For more details, please check out the <a href="https://arxiv.org/pdf/2512.08979" target="_new" style="color: #5a7a94; font-weight: 600;">paper</a>.</p>
+    </div>
 
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-full-width">
-              <img src="static/tables/hima_main_table.png" width="1000">
-              <h5>Win rates (%) across all nine race matchups (Lv.4-Lv.10) in our TextSCII-ALL evaluation environment and performance of SoTAs.</h5>
-            </div>
-          </div>
+    <div class="content has-text-justified">
+      <!-- VECTOR Benchmark Results -->
+      <div style="background: #f8f9fa; border-radius: 8px; padding: 25px; margin-bottom: 25px;">
+        <h4 style="color: #5a7a94; margin-bottom: 20px; font-weight: 600;">Performance on VECTOR Benchmark</h4>
+        <div class="has-text-centered">
+          <img src="static/tables/vector_result.png" style="max-width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 12px; font-style: italic;">Exact match (EM) accuracy on VECTOR</p>
+        </div>
+      </div>
 
-
-        <!-- <h5 class="title is-5">2) Qualitati...</h5>  -->
-          <!-- <p>
-            We qualitatively ...
-          </p> -->
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-full-width">
-            <img src="static/figures/quanti_hima_others.png" width="600">
-            <h5>Match-ups between HIMA (Ours) and SoTAs.</h5>
-          </div>
+      <!-- General Benchmark Results -->
+      <div style="background: #f8f9fa; border-radius: 8px; padding: 25px;">
+        <h4 style="color: #5a7a94; margin-bottom: 20px; font-weight: 600;">Performance on General Benchmarks</h4>
+        <div class="has-text-centered">
+          <img src="static/figures/vector_result_general_bench.png" style="max-width: 500px; width: 100%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <p style="text-align: center; font-size: 0.9em; color: #666; margin-top: 12px; font-style: italic;">Comparison of MECoT with LLaVA-One-Vision (7B) on general benchmarks</p>
         </div>
       </div>
     </div>
