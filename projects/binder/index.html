@@ -72,6 +72,17 @@
     .link-block {
       position: relative;
     }
+
+    /* Responsive figures for mobile */
+    .responsive-figure {
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    @media screen and (max-width: 768px) {
+      .responsive-figure {
+        max-width: 95% !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -212,7 +223,7 @@
 
       <!-- Figure with Explanation -->
       <div class="has-text-centered" style="margin-bottom: 25px;">
-        <img src='static/figures/binder_motivation.png' style="max-width: 60%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <img src='static/figures/binder_motivation.png' class="responsive-figure" style="max-width: 60%;">
         <p style="font-size: 0.9em; color: #666; margin-top: 12px; font-style: italic;">A robot tasked with finding and grasping a banana while navigating from p₀ to p₁</p>
       </div>
 
@@ -272,7 +283,7 @@
 
       <!-- Overview Figure -->
       <div class="has-text-centered" style="margin-bottom: 25px;">
-        <img src='static/figures/binder_overview.png' style="max-width: 85%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <img src='static/figures/binder_overview.png' class="responsive-figure" style="max-width: 85%;">
         <p style="font-size: 0.9em; color: #666; margin-top: 12px; font-style: italic;">Task: "Place the black toy on the bookshelf and the banana on the yellow plate"</p>
       </div>
 
@@ -377,7 +388,7 @@
 
       <!-- Result Figure -->
       <div class="has-text-centered" style="margin-bottom: 25px;">
-        <img src='static/figures/binder_result.png' style="max-width: 75%; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        <img src='static/figures/binder_result.png' class="responsive-figure" style="max-width: 75%;">
         <p style="font-size: 0.85em; color: #666; margin-top: 10px; font-style: italic;">Task complexity scales from 1 to 3 pick-and-place subtasks. 40 trials per task with dynamic perturbations applied during execution.</p>
       </div>
 
