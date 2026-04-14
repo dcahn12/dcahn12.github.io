@@ -1,0 +1,347 @@
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+a {
+  color: #1772d0;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #f09228;
+  text-decoration: none;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px
+}
+
+strong {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+heading {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 22px;
+  display: inline-block;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1772d0;
+}
+
+/* Section spacing */
+.section-heading {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+papertitle {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700
+}
+
+name {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 32px;
+}
+
+.one {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.two {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+.fade {
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+span.highlight {
+  background-color: #ffffd0;
+}
+
+ul, ol {
+  line-height: 1.8;
+  margin: 0;
+  padding-inline-start: 3em;
+}
+
+/* Profile Section Styles */
+#profile-section {
+  width: 90%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.profile-photo {
+  float: right;
+  width: 158px;
+  margin: -55px 0 5px 10px;
+  border-radius: 5px;
+}
+
+/* News Section Styles */
+.news-date {
+  color: #1772d0;
+  font-weight: 700;
+}
+
+.news-scroll {
+  max-height: 150px;
+  overflow-y: auto;
+  cursor: grab;
+  padding-right: 5px;
+}
+
+.news-scroll:active {
+  cursor: grabbing;
+}
+
+.news-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.news-scroll::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 2px;
+}
+
+.news-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+.news-scroll::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Equal contribution note */
+.equal-contrib {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin: 4px 0 0 24px;
+}
+
+/* TL;DR Style */
+.tldr {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #555;
+  font-style: italic;
+  line-height: 1.5;
+  background-color: #f8f8f8;
+  border-left: 3px solid #ddd;
+  border-radius: 0 4px 4px 0;
+}
+
+.tldr-label {
+  font-weight: 700;
+  color: #888;
+  font-style: normal;
+}
+
+/* Publication layout - desktop */
+.teaser {
+  width: 100%;
+  max-width: 100%;
+  border-style: none;
+}
+
+/* Preprint teaser */
+#preprints .teaser {
+  height: auto;
+  object-fit: contain;
+}
+
+/* Venue badge on publication images */
+.teaser-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.venue-badge {
+  position: absolute;
+  top: 0px;
+  left: -1px;
+  background: #1772d0;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+#publications tr {
+  border-bottom: 1px solid #eee;
+}
+
+#publications tr:last-child {
+  border-bottom: none;
+}
+
+@media screen and (min-width: 769px) {
+  #publications td {
+    display: table-cell !important;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+  }
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  /* Improve text readability */
+  body, td, th, tr, p, a, strong {
+    font-size: 15px;
+  }
+
+  papertitle {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  heading {
+    font-size: 20px;
+  }
+
+  name {
+    font-size: 26px;
+  }
+
+  /* Profile photo - mobile */
+  .profile-photo {
+    float: none;
+    display: block;
+    width: 170px;
+    margin: 0 auto 15px auto;
+  }
+
+}
+
+/* Publication entries - mobile spacing */
+@media screen and (max-width: 768px) {
+  #preprints tr,
+  #publications tr {
+    display: block;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #ddd;
+  }
+
+  #preprints tr:last-child,
+  #publications tr:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  #preprints td,
+  #publications td {
+    display: block;
+    width: 100% !important;
+    padding: 15px 5px !important;
+  }
+
+  #preprints td img.teaser,
+  #publications td img.teaser {
+    display: block;
+    margin: 0 auto 5px auto;
+    height: auto;
+  }
+
+  /* Preprint mobile size */
+  .teaser-p1 { width: 350px; }  /* SCALE */
+
+  /* Individual mobile sizes - adjust width values as needed */
+  .teaser-1 { width: 370px; }  /* BINDER */
+  .teaser-2 { width: 500px; }  /* LWE */
+  .teaser-3 { width: 350px; }  /* VECToR */
+  .teaser-4 { width: 370px; }  /* HIMA */
+  .teaser-5 { width: 350px; }  /* MA-VR */
+  .teaser-6 { width: 320px; }  /* ISR-DPO */
+  .teaser-7 { width: 320px; }  /* VLM-RLAIF */
+  .teaser-8 { width: 350px; }  /* CMOTA */
+  .teaser-9 { width: 350px; }  /* PSVL */
+}

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Tuning Large Multimodal Models for Videos using Reinforcement Learning from AI Feedback">
+  <meta name="keywords" content="Multimodal Alignment, Video Multimodal Large Model, Reinforcement Learning from AI Feedback">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ISR-DPO: Aligning Large Multimodal Models for Videos by Iterative Self-Retrospective DPO</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.12.0/gradio.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.35.2/gradio.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered is-full-width">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size:41px">
+            ISR-DPO: Aligning Large Multimodal Models for Videos by Iterative Self-Retrospective DPO
+          </h1>
+          <h1 class="title is-4 publication-title" style="color: #FF0066;">
+            AAAI 2025
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://dcahn12.github.io" target="_new">Daechul Ahn</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://yuuraa.github.io" target="_new">Yura Choi</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://mounkim.github.io" target="_new">San Kim</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://yj-yu.github.io/home/" target="_new">Youngjae Yu</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://dykang.github.io" target="_new">Dongyeop Kang</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://ppolon.github.io">Jonghyun Choi</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Seoul National University</span>
+            <span class="author-block"><sup>2</sup>Yonsei University,</span>
+            <span class="author-block"><sup>3</sup>University of Minnesota</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://dl.acm.org/doi/10.1609/aaai.v39i2.32166"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.11280v2" target="_new"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/snumprlab/isr-dpo" target="_new"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://forms.gle/2jrErx9eDisef3o97" target="_new"
+                   class="external-link button is-normal is-rounded is-dark">
+                   <span class="icon">
+                    <svg class="svg-inline--fa fa-images fa-w-18" aria-hidden="true" focusable="false" data-prefix="far" data-icon="images" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M480 416v16c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V176c0-26.51 21.49-48 48-48h16v48H54a6 6 0 0 0-6 6v244a6 6 0 0 0 6 6h372a6 6 0 0 0 6-6v-10h48zm42-336H150a6 6 0 0 0-6 6v244a6 6 0 0 0 6 6h372a6 6 0 0 0 6-6V86a6 6 0 0 0-6-6zm6-48c26.51 0 48 21.49 48 48v256c0 26.51-21.49 48-48 48H144c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h384zM264 144c0 22.091-17.909 40-40 40s-40-17.909-40-40 17.909-40 40-40 40 17.909 40 40zm-72 96l39.515-39.515c4.686-4.686 12.284-4.686 16.971 0L288 240l103.515-103.515c4.686-4.686 12.284-4.686 16.971 0L480 208v80H192v-48z"></path></svg>
+                  </span>
+                  <span>Demo (request)</span>
+                </a>
+              </span> -->
+              <!-- Video Link.
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>-->
+              <!-- Code Link.
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>-->
+              <!-- Dataset Link. -->
+              <!-- <br>
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/SNUMPR/vlm_rlaif_datasets/tree/main"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <svg class="svg-inline--fa fa-database fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="database" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 73.143v45.714C448 159.143 347.667 192 224 192S0 159.143 0 118.857V73.143C0 32.857 100.333 0 224 0s224 32.857 224 73.143zM448 176v102.857C448 319.143 347.667 352 224 352S0 319.143 0 278.857V176c48.125 33.143 136.208 48.572 224 48.572S399.874 209.143 448 176zm0 160v102.857C448 479.143 347.667 512 224 512S0 479.143 0 438.857V336c48.125 33.143 136.208 48.572 224 48.572S399.874 369.143 448 336z"></path></svg>
+                  </span>
+                  <span>Dataset</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/SNUMPR/vlm_sft_video_llava_7b/tree/main"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <svg class="svg-inline--fa fa-share-square fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="share-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M568.482 177.448L424.479 313.433C409.3 327.768 384 317.14 384 295.985v-71.963c-144.575.97-205.566 35.113-164.775 171.353 4.483 14.973-12.846 26.567-25.006 17.33C155.252 383.105 120 326.488 120 269.339c0-143.937 117.599-172.5 264-173.312V24.012c0-21.174 25.317-31.768 40.479-17.448l144.003 135.988c10.02 9.463 10.028 25.425 0 34.896zM384 379.128V448H64V128h50.916a11.99 11.99 0 0 0 8.648-3.693c14.953-15.568 32.237-27.89 51.014-37.676C185.708 80.83 181.584 64 169.033 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48v-88.806c0-8.288-8.197-14.066-16.011-11.302a71.83 71.83 0 0 1-34.189 3.377c-7.27-1.046-13.8 4.514-13.8 11.859z"></path></svg>
+                  </span>
+                  <span>Model (SFT,7b)</span>
+                  </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/SNUMPR/vlm_rlaif_video_llava_7b/tree/main"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <svg class="svg-inline--fa fa-share-square fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="share-square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M568.482 177.448L424.479 313.433C409.3 327.768 384 317.14 384 295.985v-71.963c-144.575.97-205.566 35.113-164.775 171.353 4.483 14.973-12.846 26.567-25.006 17.33C155.252 383.105 120 326.488 120 269.339c0-143.937 117.599-172.5 264-173.312V24.012c0-21.174 25.317-31.768 40.479-17.448l144.003 135.988c10.02 9.463 10.028 25.425 0 34.896zM384 379.128V448H64V128h50.916a11.99 11.99 0 0 0 8.648-3.693c14.953-15.568 32.237-27.89 51.014-37.676C185.708 80.83 181.584 64 169.033 64H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48v-88.806c0-8.288-8.197-14.066-16.011-11.302a71.83 71.83 0 0 1-34.189 3.377c-7.27-1.046-13.8 4.514-13.8 11.859z"></path></svg>
+                  </span>
+                  <span>Model (RLAIF,7b)</span>
+                  </a>
+              </span> -->
+            </div>
+          </div>
+          <br>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-fullwidth">
+              <img src='static/figures/teaser-fig.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%" loop="infinite">
+              <h5>Iterative Self-Retrospective Direct Preference Optimization, <b>ISR-DPO</b></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Iterative self-improvement, a concept extending beyond personal growth, has found powerful applications in machine learning, particularly in transforming weak models into strong ones. While recent advances in natural language processing have shown its efficacy through iterative preference optimization, applying this approach to Video Large Multi-modal Models (VLMMs) remains challenging due to modality misalignment. VLMMs struggle with this misalignment during iterative preference modeling, as the self-judge model often prioritizes linguistic knowledge over visual information. Additionally, iterative preference optimization can lead to visually hallucinated verbose responses due to length bias within the self-rewarding cycle. To address these issues, we propose Iterative Self-Retrospective Direct Preference Optimization (ISR-DPO), a method that uses self-retrospection to enhance preference modeling. This approach enhances the self-judge's focus on informative video regions, resulting in more visually grounded preferences. In extensive empirical evaluations across diverse video question answering benchmarks, the ISR-DPO significantly outperforms the state of the art. We are committed to open-sourcing our code, models, and datasets to encourage further investigation.
+            </p>
+            <!-- <ol type="1">
+                <li><b>VLM-RLAIF</b>. <span style="font-size: 95%;">We propose a novel alignment method for VLMs utilizing Reinforcement Learning from AI Feedback (RLAIF) to effectively align video-text modalities. </span></li>
+                <li><b>Context-Aware Reward Modeling</b>. <span style="font-size: 95%;">We enhance AI's feedback by introducing context-aware reward modeling, focusing on improved clarity and comprehension in video content understanding. </span></li>  
+                <li><b>Enhanced SFT Training</b>. <span style="font-size: 95%;">We enrich the Supervised Fine-Tuning (SFT) model's training by introducing additional instruction-tune data and applying a simple curriculum strategy, which we call <span style="font-weight:bold;">VLM-SFT</span>. </span></li>
+                <li><b>Performance</b>. <span style="font-size: 95%;">We demonstrate the effectiveness of our proposed VLM-RLAIF approach on various video understanding benchmarks, showing noticeable improvements over existing methods including SFT model. </span></li>
+                <li><b>Open-source</b>. <span style="font-size: 95%;">We make AI preference data, additional visual instruction tuning data (for curriculum learning), our model and code base publicly available. </span></li>
+            </ol>  
+            <p></p> -->
+            <!-- <br> -->
+            <!-- <div class="columns is-centered has-text-centered">
+              <div class="column is-fullwidth">
+                <img src='static/figures/radar.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:60%">
+                <h5>Quantitative comparison of VLMs on various video benchmarks</h5>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/4vIrqhuU5XE?si=zG8nzhUl78FZEY-Q"
+                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <h1 class="title is-3">ISR-DPO Framework</h1>
+    <div class="content has-text-justified">
+      <!-- <p>
+        <h5 class="title is-5">1) Supervised fine-tuning (SFT)</h5>
+          <p>
+            We first fine-tune an LLM, e.g., Vicuna, using supervised learning on synthetically generated video-text instruction-tune data. 
+            This involves the integration of a vision encoder with two linear layers and additional learnable parameters using LoRA, into the training process. 
+            In particular, we improve the SFT process by expanding the instruction-tune data and introducing simple curriculum learning. 
+            We refer to this fine-tuned model as the Video Large Multimodal model with SFT or <span style="font-weight:bold">VLM-SFT</span> for short.
+          </p>
+        <h5 class="title is-5">2) Reward modeling with AI feedback</h5>
+          <p>
+            A key aspect of the RLAIF involves leveraging a pre-trained AI model to generate human-like preferences between different responses generated from the same input.
+            To obtain human-like preference, we employ the VLM-SFT as a judge to assess preferences. 
+            Once preferences are judged, we train a reward model (RM) based on preferences.
+            The RM give higher score reward to the better response and lower score reward to the less appropriate one in a pair of responses, thus guiding the policy model using reinforcement learning.
+          </p>
+        <h5 class="title is-5">3) Reinforcement learning from AI feedback</h5>
+          <p>
+            We finally fine-tune a supervised policy model, initialized from the VLM-SFT, aiming to optimize the scalar reward output of the trained RM by reinforcement learning (PPO). 
+            We call this trained model as the Video Large Multimodal model with RLAIF or <b>VLM-RLAIF</b> for short.
+          </p>
+      </p> -->
+      <p>
+          <h5 class="title is-5">Each iteration of ISR-DPO involves three stages:</h5>
+          1) After training iteration \( t \), the latest updated VLMM (\( \pi_{\theta^{t}} \)) generates two different responses \( y_1 \) and \( y_2 \) for the given video \( V \) and instruction \( x \). In addition, a visual description, i.e., visual context, is generated through self-retrospection, providing the necessary input for the next stage, as indicated by the black dotted line.
+          <br>
+          2) Using the information generated in the previous stage, the model (\( \pi_{\theta^{t}} \)) compares its responses (\( y_1 \) and \( y_2 \)) and classifies the preferred response \( y_w \) and the rejected response \( y_l \).
+          <br>
+          3) Then, the VLMM (\( \pi_{\theta^{t}} \)) is optimized using DPO to update the parameters to \( \pi_{\theta^{t+1}} \).
+      </p>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <img src='static/figures/overview-fig.png' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:100%">
+          <h5>Overview of self-retrospective direct preference optimization for modality alignment between video and text </h5>
+        </div>
+      </div>
+      <p>
+        <h5 class="title is-5">Self-Retrospective Preference Modeling</h5>
+        <p>
+            A key aspect of iterative DPO is that the VLMM acts as a judge to select the most appropriate response to a given question.
+            To enhance this process, the VLMM utilizes detailed visual descriptions as visual context, which it generates itself alongside the video content for improved clarity.
+        </p>
+        <p>
+            Inspired by human learning processes, we incorporate a <em>self-retrospective</em> mechanism, where previously generated visual context is leveraged to produce better context.
+            This improves the accuracy and relevance of preference selection. The process is formulated as follows:
+        </p>
+        <p>
+            \[
+                c_{t} \sim \pi_{\theta^{t}}(V, c_{t-1})
+            \]
+        </p>
+        <p>
+            where \( c_{t-1} \) represents the visual context at time \( t-1 \).
+        </p>
+        <p>
+            Using the generated context \( c_t \), question \( x \), video \( V \), and responses \( \{y_1, y_2\} \), the aligned VLMM \( \pi_{\theta^{t}} \) classifies the preferred response \( y_w \) and the rejected response \( y_l \).
+            This process, termed <em>self-retrospective preference modeling</em>, enables the construction of preference data \( D_t^{\text{pref}} \) at time \( t \).
+        </p>
+      </p>
+
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <!-- <div class="container is-max-widescreen">
+    <h3 class="title is-4">Context-Aware Reward Modeling</h3>
+      <div class="columns is-centered">
+        <div class="column is-two-quarter">
+          <div class="content has-text-justified">
+            <p>
+              For VLM-SFT to select preference grounded on the video, we argue that a <span style="font-weight:bold">detailed understanding of video content</span> is necessary for more accurate and contextually relevant decisions by the VLM-SFT. 
+              We propose integrating detailed video descriptions, termed as <span style="font-weight:bold; font-style: italic;">context</span>, into the preference selection workflow to enhance VLMM's contextual clarity. 
+              This context allows the VLM-SFT to better understand the video content and identify the most suitable response. 
+              Integrating context with instruction inputs using a specific prompt, as shown in dotted boxes in the right Figure-(2), facilitates the collection of context-aware preferences.
+            </p>
+            <p>
+              The right figure illustrates the three stages of the proposed context-aware reward modeling:
+              <ol type="1">
+                <li>The SFT model produces two candidate responses context from the provided video. </li>
+                <li>With the video, question and responses at hand, the SFT model utilize context information and guiding prompt to evaluate the responses. </li>
+                <li>The reward model is trained using the preference pairs generated in the previous step as indicated in orange box. </li>
+              </ol>
+              Each stage involves a model's input, indicated by a dotted box, and includes a task-specific prompt, shown in a yellow box. The first stage focuses on response generation, the second on evaluation and selection of the superior response, and the third on training the reward model.
+            </p>
+          </div>
+        </div>
+        <div class="column is-fullwidth">
+          <img src='static/figures/reward_modeling.jpg' style="margin-left: auto; margin-right: auto; display: block; border-style: none width:100%;max-width:90%">
+          <span style="display: block; text-align: center; width: 100%; font-weight: bold;">Three stages of the context-aware reward modeling</span>
+        </div>
+      </div>
+  </div> -->
+
+</section>
+
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-widescreen">
+      <h2 class="title is-3">Results</h2>
+      For more experimental results, please check out the <span style="color: #305fac; font-weight:bold"><a href="https://arxiv.org/pdf/2406.11280" target="_new">paper</a></span>.
+      <div class="content has-text-justified">
+        <br>
+        <h5 class="title is-5">Quantitative comparison on in/out-domain VideoQA with prior arts</h5>
+          <p>
+            We quantitatively evaluate VLMMs on the in/out-domain VideoQA benchmark, showing effectiveness of our proposed ISR-DPO. 
+          </p>
+
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+              <img src="static/tables/results-inout.png" width="1200">
+              <h5>Quantitative comparison between different VLMMs on in-domain (left) and out-domain (right) VideoQA benchmark</h5>
+            </div>
+          </div>
+        <!-- <h5 class="title is-5">2) Qualitative comparison between VLM-SFT and VLM-RLAIF</h5> 
+          <p>
+            We qualitatively compares the performance of VLM-SFT and VLM-RLAIF, highlighting their multimodal understanding capabilities below Figure. 
+            VLM-RLAIF consistently yields more accurate answers than VLM-SFT, as highlighted in <span style="color: blue;">blue</span> for accurate responses and <span style="color: red;">red</span> for less accurate ones.
+          </p>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <img src="static/figures/sft_rlaif.png" width="1000">
+            <h5>Qualitative examples of the comparative results between VLM-SFT and VLM-RLAIF in video instruction-following task</h5>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{ahnCKYKC25,
+  author    = {Ahn, Daechul and Choi, Yura and Kim, San and Yu, Youngjae and Kang, Dongyeop and Choi, Jonghyun},
+  title     = {ISR-DPO: Aligning Large Multimodal Models for Videos by Iterative Self-Retrospective DPO},
+  booktitle = {AAAI},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          The website template is from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

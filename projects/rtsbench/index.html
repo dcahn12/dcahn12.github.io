@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RTSGameBench">
+  <meta name="keywords" content="Multimodal Agent, Agent Reasoning, Self-Evolving Framework">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTSGameBench</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.12.0/gradio.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.35.2/gradio.js"></script>
+
+  <style>
+    body {
+      color: #1f2933;
+    }
+
+    .available-btn {
+      transition: all 0.2s ease;
+    }
+
+    .available-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .available-btn:active {
+      transform: scale(0.98);
+    }
+
+    .coming-soon-btn {
+      cursor: not-allowed !important;
+      opacity: 0.72;
+      transition: all 0.2s ease;
+      pointer-events: auto !important;
+    }
+
+    .coming-soon-btn:hover {
+      opacity: 0.86;
+      transform: scale(1.02);
+    }
+
+    .link-block {
+      position: relative;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      background: #5a7a94;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .section-intro {
+      color: #666;
+      font-size: 1.05em;
+      margin: 0;
+    }
+
+    .highlight-box {
+      background: #f8f9fa;
+      border-left: 3px solid #5a7a94;
+      border-radius: 0 8px 8px 0;
+      padding: 25px 30px;
+    }
+
+    .info-banner {
+      background: #5a7a94;
+      color: white;
+      padding: 18px 25px;
+      border-radius: 6px;
+      margin-bottom: 25px;
+    }
+
+    .insight-box {
+      background: #e8f5e9;
+      border: 2px solid #4caf50;
+      color: #333;
+      padding: 18px 25px;
+      border-radius: 6px;
+      margin-top: 25px;
+    }
+
+    .paper-panel {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 22px;
+      height: 100%;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .responsive-figure {
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .figure-caption {
+      font-size: 0.92em;
+      color: #666;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .subsection-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 22px;
+      margin-top: 20px;
+    }
+
+    .subsection-card h5,
+    .subsection-card h6 {
+      margin-bottom: 12px;
+    }
+
+    .no-sort {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .sortable-header {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sortable-header:hover {
+      background-color: #e0e0e0;
+    }
+
+    .leaderboard-table th {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .leaderboard-table thead th[colspan] {
+      text-align: center;
+      vertical-align: middle;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .wr-header.sort-active:after {
+      content: " ▼";
+      font-size: 0.7em;
+    }
+
+    .tab-switcher {
+      display: inline-flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn.is-active {
+      background: #363636;
+      color: #fff;
+      border-color: #363636;
+    }
+
+    .tab-btn.is-inactive {
+      background: #fff;
+      color: #363636;
+      border-color: #dbdbdb;
+    }
+
+    @media screen and (max-width: 768px) {
+      .responsive-figure {
+        max-width: 100% !important;
+      }
+
+      .highlight-box,
+      .info-banner,
+      .insight-box,
+      .paper-panel,
+      .subsection-card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered is-full-width">
+        <div class="column has-text-centered">
+           <img src="static/image/title_v1.png" style="margin-left: auto; margin-right: auto; margin-bottom: 24px; display: block; border-style: none; width: 100%; max-width: 100%;">
+          <h1 class="title is-4 publication-title" style="color: grey;">
+            Under review 2026
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://mounkim.github.io" target="_new">San Kim</a><sup>*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://dcahn12.github.io" target="_new">Daechul Ahn</a><sup>*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="" target="_new">Reokyoung Kim</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://hyeonbeomchoi.github.io" target="_new">Hyeonbeom Choi</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://seungyeonlj.github.io" target="_new"> Seungyeon Jwa </a>,
+            </span>
+            <span class="author-block">
+              <a href="https://ppolon.github.io">Jonghyun Choi</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Seoul National University</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">* equally contributed to this work</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark coming-soon-btn">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper (Coming Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="" target="_new"
+                   class="external-link button is-normal is-rounded is-dark coming-soon-btn">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv (Coming Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="" target="_new"
+                   class="external-link button is-normal is-rounded is-dark coming-soon-btn">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming Soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#leaderboard"
+                   class="external-link button is-normal is-rounded is-dark available-btn">
+                  <span class="icon">
+                      <i class="fas fa-trophy"></i>
+                  </span>
+                  <span>Leaderboard</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <br>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-fullwidth">
+              <video
+                src="static/video/rtsbench_vid.mp4"
+                style="margin: 0 auto; display: block; width: 100%; max-width: 100%; border-style: none;"
+                controls
+                autoplay
+                loop
+                playsinline>
+                Your browser does not support the video tag.
+              </video>
+              <h5><b>Illustration of our proposed <u>RTSGameBench</u></b></h5>
+            </div>
+          </div>
+          <!-- <gradio-app src="https://snumpr-vlm-rlaif-demo.hf.space"></gradio-app> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="highlight-box">
+          <div class="content has-text-justified" style="font-size: 1.03em; line-height: 1.7; margin: 0;">
+            <p>
+              This paper introduces <b>RTSGameBench</b>, a benchmark for evaluating strategic reasoning in Vision-Language Models (VLMs) using large-scale RTS games. 
+              It focuses on long-horizon planning, multi-agent coordination, opponent modeling, and decision-making under uncertainty.
+            </p>
+
+            <ol type="1">
+              <li><b>RTSGameBench</b>. <span style="font-size: 95%;">We propose a new RTS benchmark built on <u><b>Beyond All Reason</b></u> that evaluates VLMs through both diverse full-game matchups and diagnostic mini-games in large-scale strategic environments.</span></li>
+              <li><b>Self-Evolving Game Generation</b>. <span style="font-size: 95%;">We introduce a self-evolving multi-agent framework that automatically generates new diagnostic games from free-form user queries while improving its efficiency and quality over successive cycles.</span></li>
+              <li><b>RTSGameAgent</b>. <span style="font-size: 95%;">We also provide a baseline agent for group control and memory management for VLM to operate in large-scale RTS gameplay.</span></li>
+              <li><b>Findings</b>. <span style="font-size: 95%;">Experiments show that current VLMs still struggle as coordination demands, task scale, and the number of involved agents increase.</span></li>
+            </ol>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div style="margin-bottom: 25px;">
+      <span class="section-kicker">BENCHMARK</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">RTSGameBench</h1>
+      <p class="section-intro">A benchmark suite spanning full games, diagnostic mini-games, and self-evolving scenario generation.</p>
+    </div>
+    <div class="content has-text-justified">
+      <div class="info-banner">
+        <p>
+          (1) Full-game evaluation across diverse matchup structures, (2) diagnostic mini-games that isolate specific competencies, and (3) a self-evolving game generation framework that converts free-form queries into new tests via multi-agent collaboration.
+        </p>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-fullwidth">
+          <img src="static/image/rtsbench.png" class="responsive-figure" style="margin-left: auto; margin-right: auto; display: block; border-style: none; width: 100%; max-width: 100%;">
+          <p class="figure-caption"><b>Overview of RTSGameBench and its three benchmark components</b></p>
+        </div>
+      </div>
+
+      <div class="subsection-card">
+      <h5 class="title is-5">1) Evaluation Settings in RTSGameBench</h5>
+        <p>The top shows full-game matchups with different player configurations, each reflecting distinct strategic demands. The bottom presents mini-games targeting specific RTS competencies, with fog-of-war (FoW) added only when partial observability is essential. Build, Prod., and Move denote building construction, unit production, and unit movement, respectively.</p>
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <img src="static/image/eval_setting.png" class="responsive-figure" style="margin-left: auto; margin-right: auto; display: block; border-style: none; width: 100%; max-width: 100%;">
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection-card">
+      <h5 class="title is-5">2) Diagnostic Mini-Games</h5>
+        <p>Full-game evaluation mixes multiple strategic skills at once, making it hard to identify specific weaknesses. To address this, we introduces mini-games that isolate individual RTS competencies under controlled settings for more fine-grained evaluation.</p>
+        
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <img src="static/image/mini_games.png" class="responsive-figure" style="margin-left: auto; margin-right: auto; display: block; border-style: none; width: 100%; max-width: 100%;">
+          </div>
+        </div>
+        
+        <p>
+          (a) <b>Resource Management — Time-Constrained Production (TCP).</b> <br>
+          (b) <b>Spatial & Temporal Reasoning — Multi-Front Defense (MFD).</b> <br>
+          (c) <b>Opponent Modeling — Fixed-Field Skirmish: Free-for-All (FS-F).</b> <br>
+          (d) <b>Collaboration — Fixed-Field Skirmish: Team (FS-T).</b> <br>
+          (e) <b>Adversarial Planning — Siege Planning (SP).</b> 
+        </p>  
+      </div>
+
+      <div class="subsection-card">
+      <h5 class="title is-5">3) Self-Evolving Game Generation Framework</h5>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <img src="static/image/selfevol_gemegen.png" class="responsive-figure" style="margin-left: auto; margin-right: auto; display: block; border-style: none; width: 100%; max-width: 100%;">
+            <p class="figure-caption"><b>Self-Evolving Game Generation Framework</b></p>
+          </div>
+        </div>
+
+        <div class="highlight-box">
+          <h6 class="title is-6">Generation pipeline</h6>
+            <p>Given a user query, the framework generates a new game in four stages under project manager control. The designer first creates a scenario brief, then expands it into a full GDD. Next, the developer retrieves or implements rule scripts, and finally assembles the executable game with the required assets and configurations. At each stage, the analyst validates the output through rubric-based checks and simulations, while validated artifacts are stored in a shared knowledge database for future reuse.</p>  
+        </div>
+
+        <br>
+
+        <div class="highlight-box">
+          <h6 class="title is-6">Self-evolution mechanisms</h6>
+            <p>The framework evolves through two mechanisms: a shared knowledge database that reuses validated GDDs and rule sets, and retrospective analysis that refines the analyst’s rubrics after each successful generation. Together, these make RTSGameBench a continuously extensible evaluation platform.</p>
+        </div>
+
+        <br>
+
+        <!-- <div class="column is-fullwidth">
+          <h5>You can see the full procedure of the self-evolving game generation framework below.</h5>
+          <img src="static/image/generation_video.gif" class="responsive-figure" style="margin-left: auto; margin-right: auto; display: block; border-style: none; width: 100%; max-width: 100%;">
+        </div> -->
+        <h5>You can see the full procedure of the self-evolving game generation framework below.</h5>
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-fullwidth">
+            <video
+              src="static/video/generation_video.mp4"
+              style="margin: 0 auto; display: block; width: 100%; max-width: 100%; border-style: none;"
+              controls
+              loop
+              playsinline>
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-widescreen">
+      <div style="margin-bottom: 25px;">
+        <span class="section-kicker">AGENT</span>
+        <h2 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">RTSGameAgent</h2>
+        <p class="section-intro">An agent architecture that combines agentic memory and Finite State Machine (FSM) based group control.</p>
+      </div>
+      <div class="content has-text-justified">
+          <div class="info-banner">
+            <p style="margin: 0;">RTSGameAgent is a baseline agent for large-scale RTS gameplay that combines FSM-based group management with agentic memory, enabling scalable coordination and sustained coherence under large unit counts and long durations.</p>
+          </div>
+          <p>At each decision step, the memory phase consolidates short-term event logs <strong>S<sub>t</sub></strong> with long-term memory <strong>L<sub>t-1</sub></strong> via an LLM, producing relevant entries <strong>m<sub>t</sub></strong> and updated memory <strong>L<sub>t</sub></strong>. The decision phase then feeds <strong>m<sub>t</sub></strong>, game knowledge <strong>K</strong>, and multimodal observations <strong>o<sub>t</sub></strong> to the VLM policy, which outputs building construction, unit production, group assignment, and group movement commands through an FSM-based controller.</p>
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-fullwidth">
+              <img src="static/image/rtsagent.png" class="responsive-figure" style="margin-left: auto; margin-right: auto; display: block; border-style: none; width: 100%; max-width: 100%;">
+            </div>
+          </div>
+          <div class="insight-box">
+            <p style="margin: 0;"><b>Key takeaway:</b> RTSGameAgent couples memory-grounded reasoning with structured action execution, which makes large-scale RTS control more stable and analyzable for VLM-based agents.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+
+
+<section class="section" id="leaderboard">
+    <div class="container is-max-widescreen">
+        <div style="margin-bottom: 25px;">
+            <span class="section-kicker">RESULTS</span>
+            <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+                🏆Leaderboard
+            </h1>
+            <p class="section-intro">Switch between full-game and diagnostic-game evaluations. Table sorting remains interactive.</p>
+        </div>
+
+        <div class="info-banner">
+            <p style="font-size: 1.05em; margin: 0; font-weight: 500;">
+                RTSGameBench evaluates strategic reasoning across full-game matchups and competency-targeted mini-games.
+            </p>
+        </div>
+
+        <div class="leaderboard-shell">
+            <div class="has-text-centered">
+                <div class="tab-switcher">
+                    <button id="tab-fullgame" class="button tab-btn is-active" onclick="switchTab('fullgame')">Full Game</button>
+                    <button id="tab-minigame" class="button tab-btn is-inactive" onclick="switchTab('minigame')">Diagnostic Games</button>
+                </div>
+            </div>
+
+            <div id="fullgame-description" class="has-text-centered" style="margin-bottom: 20px; padding: 0 20px; font-size: 0.95em; color: #555;">
+                <p><strong>1v1</strong>: One ally team vs. one enemy team. <strong>2v2</strong>: Two ally teams vs. two enemy teams. <strong>3v3</strong>: Three ally teams vs. three enemy teams.<br>
+                    <strong>3v4</strong>: Three ally teams vs. four enemy teams. <strong>1v1v1v1</strong>: Four separate competing teams.</p>
+            </div>
+
+            <div id="minigame-description" class="has-text-centered" style="margin-bottom: 20px; padding: 0 20px; font-size: 0.95em; color: #555; display: none;">
+                <p>Each mini-game evaluates a specific capability.<br>
+                    <strong>TCP</strong>: Resource management. <strong>MFD</strong>: Spatial and temporal reasoning. <strong>FS-F</strong>: Opponent modeling. <strong>FS-T</strong>: Collaboration. <strong>SP</strong>: Adversarial planning.</p>
+            </div>
+
+            <div class="content">
+                <div id="fullgame-container" style="overflow-x: auto;">
+                    <table class="leaderboard-table" id="fullgame-results">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="no-sort" style="vertical-align: middle;"><strong>#</strong></th>
+                                <th rowspan="2" class="no-sort" style="vertical-align: middle;"><strong>Model</strong></th>
+                                <th colspan="3" class="sortable-header" data-sort-col="2" style="border-bottom: 1px solid #ccc;"><strong>1v1</strong></th>
+                                <th colspan="3" class="sortable-header" data-sort-col="5" style="border-bottom: 1px solid #ccc;"><strong>2v2</strong></th>
+                                <th colspan="3" class="sortable-header" data-sort-col="8" style="border-bottom: 1px solid #ccc;"><strong>3v3</strong></th>
+                                <th colspan="3" class="sortable-header" data-sort-col="11" style="border-bottom: 1px solid #ccc;"><strong>3v4</strong></th>
+                                <th colspan="3" class="sortable-header" data-sort-col="14" style="border-bottom: 1px solid #ccc;"><strong>1v1v1v1</strong></th>
+                            </tr>
+                            <tr>
+                                <th class="sortable-header wr-header" data-sort-col="2">WR</th><th class="no-sort">GT<sub>W</sub></th><th class="no-sort">GT<sub>L</sub></th>
+                                <th class="sortable-header wr-header" data-sort-col="5">WR</th><th class="no-sort">GT<sub>W</sub></th><th class="no-sort">GT<sub>L</sub></th>
+                                <th class="sortable-header wr-header" data-sort-col="8">WR</th><th class="no-sort">GT<sub>W</sub></th><th class="no-sort">GT<sub>L</sub></th>
+                                <th class="sortable-header wr-header" data-sort-col="11">WR</th><th class="no-sort">GT<sub>W</sub></th><th class="no-sort">GT<sub>L</sub></th>
+                                <th class="sortable-header wr-header" data-sort-col="14">RS</th><th class="no-sort">GT<sub>W</sub></th><th class="no-sort">GT<sub>L</sub></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td style="text-align: left;"><b>GPT-5.2</b><br><span style="font-size: 11px; color: #858383;">OpenAI</span></td>
+                                <td>0.50</td><td>27</td><td>37</td>
+                                <td>0.30</td><td>95</td><td>67</td>
+                                <td>0.40</td><td>71</td><td>55</td>
+                                <td>0.10</td><td>87</td><td>45</td>
+                                <td>0.37</td><td>31</td><td>11</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td style="text-align: left;"><b>GPT-5-mini</b><br><span style="font-size: 11px; color: #858383;">OpenAI</span></td>
+                                <td>0.05</td><td>24</td><td>22</td>
+                                <td>0.05</td><td>66</td><td>56</td>
+                                <td>0.10</td><td>77</td><td>41</td>
+                                <td>0.05</td><td>77</td><td>34</td>
+                                <td>0.18</td><td>23</td><td>11</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td style="text-align: left;"><b>Claude-4.5-Sonnet</b><br><span style="font-size: 11px; color: #858383;">Anthropic</span></td>
+                                <td>0.20</td><td>28</td><td>43</td>
+                                <td>0.05</td><td>78</td><td>74</td>
+                                <td>0.15</td><td>67</td><td>58</td>
+                                <td>0.00</td><td>--</td><td>48</td>
+                                <td>0.57</td><td>28</td><td>18</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td style="text-align: left;"><b>Gemini-3-Flash</b><br><span style="font-size: 11px; color: #858383;">Google</span></td>
+                                <td>0.85</td><td>21</td><td>34</td>
+                                <td>0.50</td><td>92</td><td>69</td>
+                                <td>0.35</td><td>60</td><td>52</td>
+                                <td>0.20</td><td>56</td><td>38</td>
+                                <td>0.65</td><td>24</td><td>11</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td style="text-align: left;"><b>Kimi-K2.5</b><br><span style="font-size: 11px; color: #858383;">Moonshot AI</span></td>
+                                <td>0.30</td><td>29</td><td>37</td>
+                                <td>0.30</td><td>63</td><td>69</td>
+                                <td>0.00</td><td>--</td><td>44</td>
+                                <td>0.00</td><td>--</td><td>72</td>
+                                <td>0.45</td><td>14</td><td>23</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td style="text-align: left;"><b>Grok-4.1-Fast</b><br><span style="font-size: 11px; color: #858383;">xAI</span></td>
+                                <td>0.50</td><td>41</td><td>27</td>
+                                <td>0.00</td><td>--</td><td>56</td>
+                                <td>0.10</td><td>63</td><td>51</td>
+                                <td>0.10</td><td>60</td><td>32</td>
+                                <td>0.30</td><td>34</td><td>12</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td style="text-align: left;"><b>Qwen3.5-397B</b><br><span style="font-size: 11px; color: #858383;">Alibaba</span></td>
+                                <td>0.15</td><td>31</td><td>26</td>
+                                <td>0.00</td><td>--</td><td>62</td>
+                                <td>0.35</td><td>46</td><td>60</td>
+                                <td>0.00</td><td>--</td><td>62</td>
+                                <td>0.30</td><td>31</td><td>13</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td style="text-align: left;"><b>Qwen3-VL-235B-Instruct</b><br><span style="font-size: 11px; color: #858383;">Alibaba</span></td>
+                                <td>0.00</td><td>--</td><td>28</td>
+                                <td>0.00</td><td>--</td><td>51</td>
+                                <td>0.00</td><td>--</td><td>36</td>
+                                <td>0.00</td><td>--</td><td>43</td>
+                                <td>0.07</td><td>--</td><td>9</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td style="text-align: left;"><b>Qwen3-VL-235B-Thinking</b><br><span style="font-size: 11px; color: #858383;">Alibaba</span></td>
+                                <td>0.20</td><td>23</td><td>25</td>
+                                <td>0.00</td><td>--</td><td>58</td>
+                                <td>0.30</td><td>72</td><td>52</td>
+                                <td>0.00</td><td>--</td><td>32</td>
+                                <td>0.27</td><td>24</td><td>11</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td style="text-align: left;"><b>LLaMA4-Maverick</b><br><span style="font-size: 11px; color: #858383;">Meta</span></td>
+                                <td>0.00</td><td>--</td><td>27</td>
+                                <td>0.10</td><td>86</td><td>53</td>
+                                <td>0.00</td><td>--</td><td>45</td>
+                                <td>0.00</td><td>--</td><td>41</td>
+                                <td>0.17</td><td>21</td><td>11</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td style="text-align: left;"><b>Mistral-Large-3</b><br><span style="font-size: 11px; color: #858383;">Mistral AI</span></td>
+                                <td>0.00</td><td>--</td><td>27</td>
+                                <td>0.00</td><td>--</td><td>60</td>
+                                <td>0.00</td><td>--</td><td>45</td>
+                                <td>0.00</td><td>--</td><td>19</td>
+                                <td>0.13</td><td>34</td><td>11</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="minigame-container" style="overflow-x: auto; display: none;">
+                    <table class="leaderboard-table" id="minigame-results">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="no-sort" style="vertical-align: middle;"><strong>#</strong></th>
+                                <th rowspan="2" class="no-sort" style="vertical-align: middle;"><strong>Model</strong></th>
+                                <th colspan="2" class="sortable-header" data-sort-col="2" style="border-bottom: 1px solid #ccc;"><strong>TCP</strong></th>
+                                <th colspan="2" class="sortable-header" data-sort-col="4" style="border-bottom: 1px solid #ccc;"><strong>MFD</strong></th>
+                                <th colspan="2" class="sortable-header" data-sort-col="6" style="border-bottom: 1px solid #ccc;"><strong>FS-F</strong></th>
+                                <th colspan="2" class="sortable-header" data-sort-col="8" style="border-bottom: 1px solid #ccc;"><strong>FS-T</strong></th>
+                                <th colspan="2" class="sortable-header" data-sort-col="10" style="border-bottom: 1px solid #ccc;"><strong>SP</strong></th>
+                            </tr>
+                            <tr>
+                                <th class="sortable-header wr-header" data-sort-col="2">WR</th><th class="no-sort">AT</th>
+                                <th class="sortable-header wr-header" data-sort-col="4">WR</th><th class="no-sort">DE</th>
+                                <th class="sortable-header wr-header" data-sort-col="6">RS</th><th class="no-sort">DE</th>
+                                <th class="sortable-header wr-header" data-sort-col="8">WR</th><th class="no-sort">DE</th>
+                                <th class="sortable-header wr-header" data-sort-col="10">WR</th><th class="no-sort">AT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td style="text-align: left;"><b>GPT-5.2</b><br><span style="font-size: 11px; color: #858383;">OpenAI</span></td>
+                                <td>0.9</td><td>17</td>
+                                <td>0.3</td><td>1.01</td>
+                                <td>0.57</td><td>1.00</td>
+                                <td>0.6</td><td>1.04</td>
+                                <td>0.5</td><td>15</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td style="text-align: left;"><b>GPT-5-mini</b><br><span style="font-size: 11px; color: #858383;">OpenAI</span></td>
+                                <td>0.3</td><td>16</td>
+                                <td>0.2</td><td>1.18</td>
+                                <td>0.50</td><td>0.98</td>
+                                <td>0.3</td><td>0.97</td>
+                                <td>0.1</td><td>12</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td style="text-align: left;"><b>Claude-4.5-Sonnet</b><br><span style="font-size: 11px; color: #858383;">Anthropic</span></td>
+                                <td>1.0</td><td>14</td>
+                                <td>0.3</td><td>1.23</td>
+                                <td>0.57</td><td>1.04</td>
+                                <td>0.7</td><td>1.30</td>
+                                <td>0.8</td><td>15</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td style="text-align: left;"><b>Gemini-3-Flash</b><br><span style="font-size: 11px; color: #858383;">Google</span></td>
+                                <td>1.0</td><td>16</td>
+                                <td>0.6</td><td>1.61</td>
+                                <td>0.57</td><td>1.03</td>
+                                <td>0.5</td><td>1.12</td>
+                                <td>0.8</td><td>15</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td style="text-align: left;"><b>Kimi-K2.5</b><br><span style="font-size: 11px; color: #858383;">Moonshot AI</span></td>
+                                <td>1.0</td><td>17</td>
+                                <td>0.7</td><td>1.82</td>
+                                <td>0.20</td><td>0.82</td>
+                                <td>0.6</td><td>1.05</td>
+                                <td>0.9</td><td>12</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td style="text-align: left;"><b>Grok-4.1-Fast</b><br><span style="font-size: 11px; color: #858383;">xAI</span></td>
+                                <td>0.5</td><td>20</td>
+                                <td>0.1</td><td>0.90</td>
+                                <td>0.33</td><td>0.95</td>
+                                <td>0.5</td><td>1.17</td>
+                                <td>0.4</td><td>15</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td style="text-align: left;"><b>Qwen3.5-397B</b><br><span style="font-size: 11px; color: #858383;">Alibaba</span></td>
+                                <td>1.0</td><td>15</td>
+                                <td>0.2</td><td>1.05</td>
+                                <td>0.57</td><td>1.04</td>
+                                <td>0.4</td><td>0.96</td>
+                                <td>0.5</td><td>15</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td style="text-align: left;"><b>Qwen3-VL-235B-Instruct</b><br><span style="font-size: 11px; color: #858383;">Alibaba</span></td>
+                                <td>0.3</td><td>11</td>
+                                <td>0.0</td><td>0.50</td>
+                                <td>0.27</td><td>0.86</td>
+                                <td>0.4</td><td>1.05</td>
+                                <td>0.1</td><td>17</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td style="text-align: left;"><b>Qwen3-VL-235B-Thinking</b><br><span style="font-size: 11px; color: #858383;">Alibaba</span></td>
+                                <td>1.0</td><td>12</td>
+                                <td>0.6</td><td>1.55</td>
+                                <td>0.30</td><td>0.93</td>
+                                <td>0.6</td><td>1.09</td>
+                                <td>0.2</td><td>12</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td style="text-align: left;"><b>LLaMA4-Maverick</b><br><span style="font-size: 11px; color: #858383;">Meta</span></td>
+                                <td>0.6</td><td>25</td>
+                                <td>0.0</td><td>0.52</td>
+                                <td>0.63</td><td>1.12</td>
+                                <td>0.3</td><td>1.02</td>
+                                <td>0.5</td><td>16</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td style="text-align: left;"><b>Mistral-Large-3</b><br><span style="font-size: 11px; color: #858383;">Mistral AI</span></td>
+                                <td>0.0</td><td>--</td>
+                                <td>0.0</td><td>0.24</td>
+                                <td>0.37</td><td>0.91</td>
+                                <td>0.6</td><td>1.19</td>
+                                <td>0.0</td><td>--</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td style="text-align: left;"><b>Human</b><br><span style="font-size: 11px; color: #858383;">Baseline</span></td>
+                                <td>1.0</td><td>10</td>
+                                <td>1.0</td><td>3.46</td>
+                                <td>0.93</td><td>1.53</td>
+                                <td>1.0</td><td>1.21</td>
+                                <td>0.8</td><td>15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div style="margin-bottom: 20px;">
+      <span class="section-kicker">CITATION</span>
+      <h2 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">BibTeX</h2>
+      <p class="section-intro">Use the following citation if you reference RTSGameBench.</p>
+    </div>
+    <pre><code>@journal{kimAKCJC26,
+  author    = {Kim, San and Ahn, Daechul and Kim, Reokyoung and Choi, Hyeonbeom and Jwa, Seungyeon and Choi, Jonghyun},
+  title     = {RTSGameBench: An RTS Benchmark for Strategic Reasoning by Vision-Language Models},
+  journal   = {arXiv},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          The website template is from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setActiveTab(tab) {
+    var tabFullgame = document.getElementById('tab-fullgame');
+    var tabMinigame = document.getElementById('tab-minigame');
+
+    if (!tabFullgame || !tabMinigame) {
+      return;
+    }
+
+    if (tab === 'fullgame') {
+      tabFullgame.classList.add('is-active');
+      tabFullgame.classList.remove('is-inactive');
+      tabMinigame.classList.remove('is-active');
+      tabMinigame.classList.add('is-inactive');
+    } else {
+      tabMinigame.classList.add('is-active');
+      tabMinigame.classList.remove('is-inactive');
+      tabFullgame.classList.remove('is-active');
+      tabFullgame.classList.add('is-inactive');
+    }
+  }
+
+  function switchTab(tab) {
+    var fullgameContainer = document.getElementById('fullgame-container');
+    var minigameContainer = document.getElementById('minigame-container');
+    var fullgameDescription = document.getElementById('fullgame-description');
+    var minigameDescription = document.getElementById('minigame-description');
+
+    if (!fullgameContainer || !minigameContainer || !fullgameDescription || !minigameDescription) {
+      return;
+    }
+
+    if (tab === 'fullgame') {
+      fullgameContainer.style.display = 'block';
+      minigameContainer.style.display = 'none';
+      fullgameDescription.style.display = 'block';
+      minigameDescription.style.display = 'none';
+    } else {
+      fullgameContainer.style.display = 'none';
+      minigameContainer.style.display = 'block';
+      fullgameDescription.style.display = 'none';
+      minigameDescription.style.display = 'block';
+    }
+
+    setActiveTab(tab);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    function updateRowNumbers(tableId) {
+      var rows = document.querySelectorAll("#" + tableId + " tbody tr");
+      rows.forEach(function (row, index) {
+        row.querySelector("td").innerText = index + 1;
+      });
+    }
+
+    function sortByColumn(table, col) {
+      if (!table || !table.tBodies.length) {
+        return;
+      }
+
+      var tbody = table.tBodies[0];
+      var rows = Array.from(tbody.rows);
+
+      rows.sort(function (a, b) {
+        var valA = parseFloat(a.cells[col].innerText) || 0;
+        var valB = parseFloat(b.cells[col].innerText) || 0;
+        return valB - valA;
+      });
+
+      while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+      }
+
+      rows.forEach(function (row) {
+        tbody.appendChild(row);
+      });
+
+      table.querySelectorAll('.wr-header').forEach(function (el) {
+        el.classList.remove('sort-active');
+      });
+
+      var activeHeader = table.querySelector('.wr-header[data-sort-col="' + col + '"]');
+      if (activeHeader) {
+        activeHeader.classList.add('sort-active');
+      }
+    }
+
+    document.querySelectorAll('[data-sort-col]').forEach(function (header) {
+      header.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var col = parseInt(this.getAttribute('data-sort-col'), 10);
+        var table = this.closest('table');
+        sortByColumn(table, col);
+        updateRowNumbers(table.id);
+      });
+    });
+
+    sortByColumn(document.getElementById('fullgame-results'), 2);
+    updateRowNumbers("fullgame-results");
+    sortByColumn(document.getElementById('minigame-results'), 2);
+    updateRowNumbers("minigame-results");
+    setActiveTab('fullgame');
+  });
+</script>
+
+</body>
+</html>

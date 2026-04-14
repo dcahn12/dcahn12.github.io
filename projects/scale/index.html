@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Self-uncertainty Conditioned Adaptive Looking and Execution for Vision-Language-Action Models">
+  <meta name="keywords" content="Vision-Language-Action, VLA, Test-time Scaling, Robotic Control, Active Inference, Uncertainty">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SCALE: Self-uncertainty Conditioned Adaptive Looking and Execution for Vision-Language-Action Models</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+    /* Available button styles */
+    .available-btn {
+      transition: all 0.2s ease;
+    }
+    .available-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .available-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Coming soon button styles */
+    .coming-soon-btn {
+      cursor: not-allowed !important;
+      opacity: 0.6;
+      transition: all 0.2s ease;
+      pointer-events: auto !important;
+    }
+    .coming-soon-btn:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+    .coming-soon-btn:active {
+      transform: scale(0.98);
+    }
+
+    .link-block {
+      position: relative;
+    }
+
+    /* Responsive figures for mobile */
+    .responsive-figure {
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    @media screen and (max-width: 768px) {
+      .responsive-figure {
+        max-width: 95% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered is-full-width">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size:38px">
+            SCALE: Self-uncertainty Conditioned Adaptive Looking and Execution for Vision-Language-Action Models
+          </h1>
+          <h1 class="title is-4 publication-title" style="color: #666;">
+            arXiv 2026
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://hyeonbeomchoi.github.io/" target="_new">Hyeonbeom Choi*</a>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="https://dcahn12.github.io/" target="_new">Daechul Ahn*</a>,&nbsp;
+            </span>
+            <span class="author-block">
+              <a href="" target="">Youhan Lee</a>,&nbsp;
+            </span>
+
+            <br>
+
+            <span class="author-block">
+              <a href="https://twkang43.github.io/" target="_new">Taewook Kang</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://seongwon980.github.io/" target="_new">Seongwon Cho</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://ppolon.github.io" target="_new">Jonghyun Choi</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Seoul National University</span>
+          </div>
+          <div class="is-size-6 publication-authors">
+            <span class="author-block">* equally contributed to this work</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- arXiv Link (available) -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2602.04208" target="_new"
+                   class="external-link button is-normal is-rounded is-dark available-btn">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Coming Soon Links -->
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-light coming-soon-btn"
+                   onclick="alert('Code will be available soon!')" title="Coming soon">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-10">
+          <h2 class="title is-3">Abstract</h2>
+          <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 8px 8px 0; padding: 25px 30px;">
+            <div class="content has-text-justified" style="font-size: 1.05em; line-height: 1.7; margin: 0;">
+              Vision-Language-Action (VLA) models have emerged as a promising paradigm for general-purpose robotic control, with test-time scaling (TTS) gaining attention to enhance robustness beyond training. However, existing TTS methods require <b>additional training</b>, <b>verifiers</b>, and <b>multiple forward passes</b>, making them impractical for deployment. Moreover, they intervene only at action decoding while keeping visual representations fixed—insufficient under perceptual ambiguity. We propose <span style="background: #5a7a94; color: white; padding: 2px 8px; border-radius: 3px; font-weight: 600;">SCALE</span>, a simple inference strategy that jointly modulates <b>visual perception</b> and <b>action</b> based on <em>self-uncertainty</em>, inspired by Active Inference theory—requiring no additional training, no verifier, and only a single forward pass.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <!-- MOTIVATION Section -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">MOTIVATION</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        The Robustness Challenge in VLA Models
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">Why do current test-time scaling methods fall short?</p>
+    </div>
+    <div class="content has-text-justified">
+
+      <!-- Key Question Box -->
+      <div style="background: #5a7a94; color: white; padding: 18px 25px; border-radius: 6px; margin-bottom: 25px;">
+        <p style="font-size: 1.1em; margin: 0; font-weight: 500;">
+          Vision-Language-Action (VLA) models enable robots to follow natural language instructions, but they struggle with <b>robustness</b> at test time. Existing test-time scaling (TTS) approaches try to address this, but they come with significant drawbacks that limit practical deployment.
+        </p>
+      </div>
+
+      <!-- Figure with Explanation -->
+      <div class="has-text-centered" style="margin-bottom: 25px;">
+        <img src='static/figures/scale_motivation.png' class="responsive-figure" style="max-width: 60%;">
+        <p style="font-size: 0.9em; color: #666; margin-top: 12px; font-style: italic;">Limitations of existing TTS methods vs. our approach</p>
+      </div>
+
+      <!-- Problems with Existing Methods -->
+      <div class="columns">
+        <div class="column is-4">
+          <div style="background: #ffebee; border-radius: 6px; padding: 18px; height: 100%;">
+            <h4 style="color: #c62828; margin-bottom: 10px; font-weight: 600;">Multiple Forward Passes</h4>
+            <p style="font-size: 0.9em; margin: 0;">Existing TTS methods require sampling multiple action candidates and evaluating them, significantly increasing inference time and computational cost.</p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div style="background: #ffebee; border-radius: 6px; padding: 18px; height: 100%;">
+            <h4 style="color: #c62828; margin-bottom: 10px; font-weight: 600;">External Verifiers</h4>
+            <p style="font-size: 0.9em; margin: 0;">Many approaches rely on separate verifier models or value functions to select among candidates, adding complexity and training overhead.</p>
+          </div>
+        </div>
+        <div class="column is-4">
+          <div style="background: #ffebee; border-radius: 6px; padding: 18px; height: 100%;">
+            <h4 style="color: #c62828; margin-bottom: 10px; font-weight: 600;">Fixed Visual Perception</h4>
+            <p style="font-size: 0.9em; margin: 0;">Current methods only intervene at action decoding, keeping visual representations fixed. Under perceptual ambiguity, <em>how to perceive</em> matters as much as <em>what to do</em>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Insight -->
+      <div style="background: #e8f5e9; border: 2px solid #4caf50; color: #333; padding: 18px 25px; border-radius: 6px; margin-top: 25px;">
+        <p style="font-size: 1.02em; margin: 0;">
+          <b>Key Insight:</b> Inspired by <em>Active Inference</em> theory, we propose to jointly modulate both perception and action based on the model's own uncertainty—broadening exploration when uncertain, and focusing on exploitation when confident. This enables adaptive behavior with <b>no additional training</b>, <b>no verifier</b>, and <b>only a single forward pass</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <!-- METHOD Section -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">METHOD</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        Self-uncertainty Conditioned Adaptive Looking and Execution
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">Jointly modulating visual attention and action decoding based on self-uncertainty</p>
+    </div>
+    <div class="content has-text-justified">
+
+      <!-- Core Concept -->
+      <div style="background: #5a7a94; color: white; padding: 18px 25px; border-radius: 6px; margin-bottom: 25px;">
+        <p style="font-size: 1.1em; margin: 0; font-weight: 500;">
+          SCALE computes a <b>self-uncertainty</b> measure from the model's own predictions, then uses it to adaptively control both <em>visual attention</em> (how the model perceives the scene) and <em>action decoding</em> (how the model selects actions). High uncertainty triggers broader exploration; low uncertainty enables focused exploitation.
+        </p>
+      </div>
+
+      <!-- Overview Figure -->
+      <div class="has-text-centered" style="margin-bottom: 25px;">
+        <img src='static/figures/scale_overview.png' class="responsive-figure" style="max-width: 85%;">
+        <p style="font-size: 0.9em; color: #666; margin-top: 12px; font-style: italic;">Overview of SCALE: Self-uncertainty modulates both visual perception and action decoding</p>
+      </div>
+
+      <!-- Two Components -->
+      <div class="columns" style="margin-bottom: 25px;">
+        <div class="column is-6">
+          <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 6px 6px 0; padding: 18px; height: 100%;">
+            <h4 style="color: #5a7a94; margin-bottom: 10px; font-weight: 600;">Adaptive Looking (Visual Attention)</h4>
+            <p style="font-size: 0.95em; margin: 0;">Under high uncertainty, SCALE broadens the visual attention to consider a wider context of the scene. When confident, it focuses attention on task-relevant regions for precise execution.</p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div style="background: #f8f9fa; border-left: 3px solid #5a7a94; border-radius: 0 6px 6px 0; padding: 18px; height: 100%;">
+            <h4 style="color: #5a7a94; margin-bottom: 10px; font-weight: 600;">Adaptive Execution (Action Decoding)</h4>
+            <p style="font-size: 0.95em; margin: 0;">High uncertainty leads to more exploratory action sampling (higher temperature). Low uncertainty enables deterministic, confident action selection for reliable execution.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <!-- RESULTS Section -->
+    <div style="margin-bottom: 25px;">
+      <span style="background: #5a7a94; color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.5px;">RESULTS</span>
+      <h1 class="title is-3" style="margin-top: 12px; margin-bottom: 8px;">
+        Experimental Evaluation
+      </h1>
+      <p style="color: #666; font-size: 1.05em; margin: 0;">For more details, please check out the <a href="https://arxiv.org/pdf/2602.04208" target="_new" style="color: #5a7a94; font-weight: 600;">paper</a>.</p>
+    </div>
+    <div class="content has-text-justified">
+
+      <!-- Key Results Box -->
+      <div style="background: #5a7a94; color: white; padding: 18px 25px; border-radius: 6px; margin-bottom: 25px;">
+        <p style="font-size: 1.05em; margin: 0; font-weight: 500;">
+          SCALE consistently improves state-of-the-art VLA models across both simulated and real-world benchmarks, outperforming existing test-time scaling methods while maintaining <b>single-pass efficiency</b>.
+        </p>
+      </div>
+
+      <!-- Simulation Results -->
+      <h4 style="color: #5a7a94; margin-bottom: 12px; font-weight: 600;">Simulation Experiments</h4>
+      <div class="has-text-centered" style="margin-bottom: 25px;">
+        <img src='static/figures/scale_results_simul.png' class="responsive-figure" style="max-width: 65%;">
+        <p style="font-size: 0.85em; color: #666; margin-top: 10px; font-style: italic;">Success Rate (%) on LIBERO with OpenVLA backbone. Additional experiments with various VLA architectures are available in the paper.</p>
+      </div>
+
+      <!-- Real-World Results -->
+      <h4 style="color: #5a7a94; margin-bottom: 12px; font-weight: 600;">Real-World Experiments</h4>
+      <div class="has-text-centered" style="margin-bottom: 20px;">
+        <img src='static/figures/scale_results_real.png' class="responsive-figure" style="max-width: 85%;">
+        <p style="font-size: 0.85em; color: #666; margin-top: 10px; font-style: italic;">Succes (%) on real-world “Put A on B” pick-and-place tasks (A/B = object/receptacle) under ID and OOD conditions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{choiALKCC2026scale,
+  author    = {Choi, Hyeonbeom and Ahn, Daechul and Lee, Youhan and Kang, Taewook and Cho, Seongwon and Choi, Jonghyun},
+  title     = {SCALE: Self-uncertainty Conditioned Adaptive Looking and Execution for Vision-Language-Action Models},
+  journal   = {arXiv preprint arXiv:2602.04208},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          The website template is from <a href="https://github.com/nerfies/nerfies.github.io">here</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
