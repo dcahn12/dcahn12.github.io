@@ -151,6 +151,15 @@
       margin-bottom: 12px;
     }
 
+    .human-row {
+      background-color: rgba(90, 122, 148, 0.12);
+      font-style: italic;
+    }
+
+    .human-row td {
+      border-top: 2px solid #5a7a94;
+    }
+
     .no-sort {
       cursor: default;
       pointer-events: none;
@@ -757,7 +766,7 @@
                                 <td>0.6</td><td>1.19</td>
                                 <td>0.0</td><td>--</td>
                             </tr>
-                            <tr>
+                            <tr class="human-row">
                                 <td>12</td>
                                 <td style="text-align: left;"><b>Human</b><br><span style="font-size: 11px; color: #858383;">Baseline</span></td>
                                 <td>1.0</td><td>10</td>
@@ -856,8 +865,13 @@
   document.addEventListener("DOMContentLoaded", function () {
     function updateRowNumbers(tableId) {
       var rows = document.querySelectorAll("#" + tableId + " tbody tr");
-      rows.forEach(function (row, index) {
-        row.querySelector("td").innerText = index + 1;
+      var rank = 1;
+      rows.forEach(function (row) {
+        if (row.classList.contains('human-row')) {
+          row.querySelector("td").innerText = "-";
+        } else {
+          row.querySelector("td").innerText = rank++;
+        }
       });
     }
 
@@ -867,7 +881,10 @@
       }
 
       var tbody = table.tBodies[0];
-      var rows = Array.from(tbody.rows);
+      var allRows = Array.from(tbody.rows);
+
+      var pinnedRows = allRows.filter(function (r) { return r.classList.contains('human-row'); });
+      var rows = allRows.filter(function (r) { return !r.classList.contains('human-row'); });
 
       rows.sort(function (a, b) {
         var valA = parseFloat(a.cells[col].innerText) || 0;
@@ -880,6 +897,10 @@
       }
 
       rows.forEach(function (row) {
+        tbody.appendChild(row);
+      });
+
+      pinnedRows.forEach(function (row) {
         tbody.appendChild(row);
       });
 
